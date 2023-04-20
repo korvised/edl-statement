@@ -1,0 +1,39 @@
+.sweetalert-container {
+  @apply font-lao bg-white;
+}
+
+.sweetalert-popup {
+  width: 20rem !important;
+  @apply bg-white shadow-xl;
+
+  @screen md {
+    width: 25rem !important;
+  }
+}
+
+.sweetalert-icon {
+  width: 3.7rem !important;
+  height: 3.7rem !important;
+}
+
+.sweetalert-title {
+  font-size: 1.5rem !important;
+}
+
+.sweetalert-text {
+  font-size: 1rem !important;
+}
+
+.sweetalert-buttons {
+  font-size: 0.9rem !important;
+  padding: 0.5rem 1.5rem !important;
+  background: #000 !important;
+  outline: none !important;
+}
+
+.sweetalert-buttons-danger {
+  font-size: 0.9rem !important;
+  padding: 0.5rem 1.5rem !important;
+  background-color: #dc2626 !important;
+  outline: none !important;
+}
