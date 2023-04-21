@@ -44,11 +44,7 @@
 }
 
 .nav {
-  @apply hidden space-x-10 md:flex;
-
-  &__link {
-    @apply text-base font-medium text-gray-500 hover:text-gray-900;
-  }
+  @apply hidden space-x-4 md:flex;
 }
 
 .userSection {

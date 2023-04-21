@@ -3,21 +3,21 @@ import clsx from "clsx"
 
 interface Props {
   path: string
-  text: string
+  label: string
 }
 
-export default function Link({ path, text }: Props) {
+export default function Link({ path, label }: Props) {
   return (
     <NavLink
       to={path}
       className={({ isActive }) =>
         clsx(
           isActive ? "text-black" : "text-gray-600 hover:text-gray-900",
-          "text-base font-medium"
+          "text-sm font-medium"
         )
       }
     >
-      {text}
+      {label}
     </NavLink>
   )
 }

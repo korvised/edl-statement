@@ -1,17 +1,27 @@
+import { useMemo } from "react"
 import { Popover } from "@headlessui/react"
 import { Bars3Icon } from "@heroicons/react/24/outline"
 
-// import { reportRoutes, serviceRoutes, settingRoutes } from "@/config/navigation"
+import { routes } from "@/config/routes"
 import { signOut } from "@/state/slices/authSlice"
 import { useAppDispatch, useAppSelector } from "@/state/hooks"
 import MiniNavbar from "@/common/ui/layout/MiniNavbar"
 import Link from "./Link"
+import SettingIcon from "./SettingIcon"
 import classes from "./MainHeader.module.scss"
 
 export default function MainHeader() {
-  const { user } = useAppSelector(state => state.auth)
-
   const dispatch = useAppDispatch()
+
+  const auth = useAppSelector(state => state.auth)
+
+  const filteredRoutes = useMemo(
+    () =>
+      routes.filter(route =>
+        route.authorizes.some(role => auth.user?.roles.includes(role))
+      ),
+    [auth.user]
+  )
 
   const handlerSignOut = () => {
     dispatch(signOut())
@@ -39,11 +49,15 @@ export default function MainHeader() {
           </div>
 
           <Popover.Group as="nav" className={classes.nav}>
-            <Link path="/dashboard" text="ໜ້າຫຼັກ" />
-            <Link path="/about" text="ກ່ຽວກັບພວກເຮົາ" />
+            <Link path="/dashboard" label="ໜ້າຫຼັກ" />
+            {filteredRoutes.map(route => (
+              <Link key={route.path} path={route.path} label={route.name} />
+            ))}
+            <Link path="/about" label="ກ່ຽວກັບພວກເຮົາ" />
           </Popover.Group>
           <div className={classes.userSection}>
-            <h3 className={classes.userSection__name}>{user?.username}</h3>
+            <SettingIcon />
+
             <button
               className={classes.userSection__button}
               onClick={handlerSignOut}

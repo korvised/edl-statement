@@ -5,6 +5,7 @@ import { UserRole } from "./auth.type"
 
 export interface IRout {
   name: string
+  title?: string
   description: string
   path: string
   icon: ForwardRefExoticComponent<SVGProps<SVGSVGElement>> | IconType

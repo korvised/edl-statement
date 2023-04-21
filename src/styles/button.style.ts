@@ -21,7 +21,7 @@ export const buttonBaseStyles: IButtonBaseStyle = {
   solid:
     "inline-flex justify-center rounded-lg py-2 px-3 text-sm font-semibold outline-2 outline-offset-2 transition-colors transition delay-150 ease-in-out",
   outline:
-    "inline-flex justify-center rounded-lg border py-2 px-x text-sm outline-2 outline-offset-2 transition-colors",
+    "inline-flex justify-center rounded-lg border py-2 px-3 text-sm outline-2 outline-offset-2 transition-colors",
 }
 
 export const buttonVariantStyles: IButtonVariantStyle = {
