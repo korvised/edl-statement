@@ -9,7 +9,7 @@ export default function Routing() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="sign-in" element={<SignIn />} />
+        <Route path="/" element={<SignIn />} />
 
         {privateRoute.map(({ path, Component }) => (
           <Route

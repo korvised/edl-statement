@@ -14,7 +14,7 @@
   @apply flex justify-start lg:w-0 lg:flex-1;
 
   .link {
-    @apply flex gap-x-2 items-center;
+    @apply flex items-center gap-x-2;
   }
 
   & img {
@@ -29,7 +29,7 @@
     }
 
     & p {
-      @apply font-mono text-base overline underline-offset-4 decoration-2 decoration-amber-400;
+      @apply font-mono text-base text-sm overline decoration-amber-400 decoration-2 underline-offset-4;
     }
   }
 }
@@ -47,7 +47,7 @@
   @apply hidden space-x-10 md:flex;
 
   &__link {
-    @apply text-base font-medium text-gray-600 hover:text-gray-900;
+    @apply text-base font-medium text-gray-500 hover:text-gray-900;
   }
 }
 
@@ -60,6 +60,6 @@
 
   &__button {
     @apply ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-full border border-transparent
-    bg-black px-4 py-1.5 text-sm text-white hover:opacity-80;
+    bg-rose-700 px-4 py-1.5 text-sm text-white hover:opacity-80;
   }
 }

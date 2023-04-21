@@ -9,12 +9,12 @@ export default function SignIn() {
   const { isAuthenticated } = useAppSelector(state => state.auth)
 
   if (isAuthenticated) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/dashboard" replace />
   }
 
   return (
     <Fragment>
-      <AppTitle title="Counter Service | Sign in" />
+      <AppTitle title="Sign in | ການຢືນຢັນຕົວຕົນ" />
       <SignInForm />
     </Fragment>
   )

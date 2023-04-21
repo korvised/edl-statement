@@ -38,15 +38,11 @@ export interface IToken {
 }
 
 export interface IAuthUser {
-  userId: number
-  userName: string
-  gender: string
   fullName: string
-  branch: string
-  branchCode: string
-  branchName: string | null
-  profile: string | null
+  username: string
+  accountLocked: boolean
   tel: string
-  status: number
   roles: UserRole[]
+  nameLa: string
+  accountNumber: string
 }

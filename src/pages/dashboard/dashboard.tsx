@@ -4,6 +4,7 @@ import { useAppSelector } from "@/state/hooks"
 import Layout from "@/common/ui/layout"
 import { AppTitle } from "@/common/ui/components"
 import { UserRole } from "@/types/auth.type"
+import { UserInfoSection } from "@/components/dashboard"
 // import { HeroSection, ServiceSection } from "@/components/dashboard"
 
 export default function Example() {
@@ -11,13 +12,12 @@ export default function Example() {
 
   return (
     <Fragment>
-      <AppTitle title="Counter Service" />
+      <AppTitle title="Home | ໜ້າຫຼັກ" />
       <Layout>
-        Dashboard
-        {/*{auth.user?.roles.includes(UserRole.TELLER) && <ServiceSection />}*/}
-        {auth.user?.roles.includes(UserRole.ROOT) && (
-          <Fragment>{/*<HeroSection />*/}</Fragment>
-        )}
+        <div className="py-8 space-y-8">
+          {auth.user && <UserInfoSection user={auth.user} />}
+        </div>
+
       </Layout>
     </Fragment>
   )

@@ -17,7 +17,7 @@ const AuthGuard: FC<Props> = ({ children }) => {
   }
 
   if (auth.status === APIStatus.REJECTED || !auth.isAuthenticated) {
-    return <Navigate to="/sign-in" replace />
+    return <Navigate to="/" replace />
   }
 
   return children

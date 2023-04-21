@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { Popover } from "@headlessui/react"
 import { Bars3Icon } from "@heroicons/react/24/outline"
 
@@ -6,6 +5,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline"
 import { signOut } from "@/state/slices/authSlice"
 import { useAppDispatch, useAppSelector } from "@/state/hooks"
 import MiniNavbar from "@/common/ui/layout/MiniNavbar"
+import Link from "./Link"
 import classes from "./MainHeader.module.scss"
 
 export default function MainHeader() {
@@ -22,13 +22,13 @@ export default function MainHeader() {
       <Popover className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
-            <Link to="/" className={classes.link}>
+            <div className={classes.link}>
               <img src="/apb.png" alt="logo" />
               <h3 className={classes.logo__name}>
                 <b>ທະນາຄານສົ່ງເສີມກະສີກໍາ</b>
-                <p>Counter Service</p>
+                <p>APIS Water Supply</p>
               </h3>
-            </Link>
+            </div>
           </div>
 
           <div className={classes.miniMenu}>
@@ -39,30 +39,11 @@ export default function MainHeader() {
           </div>
 
           <Popover.Group as="nav" className={classes.nav}>
-            {/*{user?.roles.includes(UserRole.TELLER) && (*/}
-            {/*  <Dropdown*/}
-            {/*    name="ບໍລິການ"*/}
-            {/*    routes={serviceRoutes.filter(s => s.isOnline)}*/}
-            {/*  />*/}
-            {/*)}*/}
-
-            {/*{user?.roles.includes(UserRole.TELLER) && (*/}
-            {/*  <Dropdown*/}
-            {/*    name="ລາຍງານ"*/}
-            {/*    routes={reportRoutes.filter(r => r.isOnline)}*/}
-            {/*  />*/}
-            {/*)}*/}
-
-            {/*{user?.roles.includes(UserRole.ROOT) && (*/}
-            {/*  <Dropdown name="ຕັ້ງຄ່າ" routes={settingRoutes} />*/}
-            {/*)}*/}
-
-            <Link to="/about" className={classes.nav__link}>
-              ກ່ຽວກັບພວກເຮົາ
-            </Link>
+            <Link path="/dashboard" text="ໜ້າຫຼັກ" />
+            <Link path="/about" text="ກ່ຽວກັບພວກເຮົາ" />
           </Popover.Group>
           <div className={classes.userSection}>
-            <h3 className={classes.userSection__name}>{user?.userName}</h3>
+            <h3 className={classes.userSection__name}>{user?.username}</h3>
             <button
               className={classes.userSection__button}
               onClick={handlerSignOut}

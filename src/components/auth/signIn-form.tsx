@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from "react"
-import { Link } from "react-router-dom"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid"
 
 import { useAppDispatch } from "@/state/hooks"
@@ -53,7 +52,9 @@ function SignInForm() {
               alt="Your Company"
             />
             <h2 className={classes.title}>EDL Statement</h2>
-            <p className={classes.subtitle}>ລະບົບລາຍງານທຸລະກໍາການຊໍາລະຄ່າໄຟຟ້າຜ່ານ ທສກ</p>
+            <p className={classes.subtitle}>
+              ລະບົບລາຍງານທຸລະກໍາການຊໍາລະຄ່າໄຟຟ້າຜ່ານ ທສກ
+            </p>
           </div>
 
           <form className="mt-6 space-y-4" onSubmit={loginHandle}>

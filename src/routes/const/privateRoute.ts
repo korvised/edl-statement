@@ -3,6 +3,6 @@ import Dashboard from "@/pages/dashboard"
 import About from "@/pages/about"
 
 export const privateRoute: IAuthRout[] = [
-  { path: "/", Component: Dashboard },
+  { path: "/dashboard", Component: Dashboard },
   { path: "/about", Component: About },
 ]
