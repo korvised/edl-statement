@@ -22,7 +22,7 @@ export const login = createAsyncThunk<
     // console.log(body)
     // todo: Create authenticate form data
     const formData = new FormData()
-    formData.append("username", body.teller)
+    formData.append("username", body.username)
     formData.append("password", body.password)
     formData.append("grant_type", "password")
 

@@ -1,6 +1,6 @@
 export const AUTH_USERNAME = "center@admin"
 export const AUTH_PASSWORD = "admin"
-export const BASE_URL = "http://10.2.6.171:8000/center/api/v0"
+export const BASE_URL = "10.2.6.173:9121/ws-upload/api/v1"
 // export const BASE_URL = "http://apb.services.pro/center/api/v1"
 
 export const DEFAULT_PROVINCE = "ກຳແພງນະຄອນ"

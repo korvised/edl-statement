@@ -1,15 +1,8 @@
 import { APIStatus } from "./api.type"
 
 export interface AuthBody {
-  teller: string
-  password: string
-}
-
-export interface SignUpBody {
   username: string
   password: string
-  tel: string
-  roleId: number
 }
 
 export interface LoginPayload {
@@ -18,19 +11,16 @@ export interface LoginPayload {
   refresh_token: string
   expires_in: number
   scope: string
-  appV: string
-  appVId: number
-  userId: number
-  username: string
+  code: string
+  roles: UserRole[]
+  message: string
+  status: string
   jti: string
 }
 
 export enum UserRole {
-  ROOT = "ROOT",
-  TELLER = "TELLER",
-  MAKER = "MAKER",
-  CHECKER = "CHECKER",
-  ADMIN = "ADMIN",
+  ADMIN = "ROLE_ADMIN",
+  USER = "ROLE_USER",
 }
 
 export interface AuthState {
@@ -40,17 +30,6 @@ export interface AuthState {
   refreshToken?: string | null
   user?: IAuthUser
   status: APIStatus
-}
-
-export interface IJWTDecode {
-  authorities: UserRole[]
-  client_id: string
-  exp: number
-  jti: string
-  message: string
-  scope: string[]
-  status: number
-  user_name: string
 }
 
 export interface IToken {
