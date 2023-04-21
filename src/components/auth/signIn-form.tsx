@@ -53,7 +53,7 @@ function SignInForm() {
               alt="Your Company"
             />
             <h2 className={classes.title}>EDL Statement</h2>
-            <p className={classes.subtitle}>ລະບົບໃຫ້ບໍລິການລູກຄ້າຜ່ານເຄົາເຕີ</p>
+            <p className={classes.subtitle}>ລະບົບລາຍງານທຸລະກໍາການຊໍາລະຄ່າໄຟຟ້າຜ່ານ ທສກ</p>
           </div>
 
           <form className="mt-6 space-y-4" onSubmit={loginHandle}>
