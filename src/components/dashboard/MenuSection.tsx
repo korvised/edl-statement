@@ -7,7 +7,7 @@ interface Props {
 
 export default function MenuSection({ routes }: Props) {
   return (
-    <div className="section-md grid gap-6 sm:grid-cols-2 md:gap-8">
+    <div className="section-md grid gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
       {routes.map(route => (
         <MenuItem key={route.path} route={route} />
       ))}

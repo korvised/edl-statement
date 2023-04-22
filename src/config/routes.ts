@@ -1,4 +1,9 @@
-import { FaHandHoldingWater, FiUploadCloud, FiUsers } from "react-icons/all"
+import {
+  BsClockHistory,
+  FaHandHoldingWater,
+  FiUploadCloud,
+  FiUsers,
+} from "react-icons/all"
 import { IRout } from "@/types/layout.type"
 import { UserRole } from "@/types/auth.type"
 
@@ -16,21 +21,30 @@ export const routes: IRout[] = [
     isOnline: true,
   },
   {
+    path: "/statement",
+    name: "Statement",
+    title: "Statement",
+    description:
+      "ລາຍງານຂໍ້ມູນການຊໍາລະນໍ້າປະປາຜ່ານທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
+    icon: FaHandHoldingWater,
+    authorizes: [USER],
+    isOnline: true,
+  },
+  {
     path: "/upload",
     name: "ອັບໂຫຼດໄຟລ໌",
-    title: "ອັບໂຫຼດໄຟລ໌ຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ",
-    description: "upload file",
+    title: "ອັບໂຫຼດໄຟລ໌",
+    description: "ອັບໂຫຼດໄຟລ໌ຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ",
     icon: FiUploadCloud,
     authorizes: [USER],
     isOnline: true,
   },
   {
-    path: "/statement",
-    name: "ລາຍງານການຊຳລະນໍ້າປະປາ",
-    title: "ຂໍ້ມູນການຊໍາລະນໍ້າປະປາ",
-    description:
-      "ລາຍງານຂໍ້ມູນການຊໍາລະນໍ້າປະປາຜ່ານທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
-    icon: FaHandHoldingWater,
+    path: "/upload-history",
+    name: "ປະຫວັດ",
+    title: "ປະຫວັດການອັບໂຫຼດໄຟລ໌",
+    description: "ປະຫວັດການອັບໂຫຼດໄຟລ໌ຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ",
+    icon: BsClockHistory,
     authorizes: [USER],
     isOnline: true,
   },

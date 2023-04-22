@@ -4,12 +4,11 @@ import {
   AuthState,
   IAuthUser,
   IToken,
-  LoginPayload
+  LoginPayload,
 } from "@/types/auth.type"
-import { TokenService } from "@/common/services/token.service"
 import { APIData, APIError, APIStatus } from "@/types/api.type"
-import { api, authApi } from "@/common/api"
-import { getExceptionPayload } from "@/common/api/axiosException"
+import { api, authApi, getExceptionPayload } from "@/common/api"
+import { TokenService } from "@/common/services"
 
 const tokenService = new TokenService()
 
@@ -26,15 +25,12 @@ export const login = createAsyncThunk<
     formData.append("password", body.password)
     formData.append("grant_type", "password")
 
-    const response = await authApi.post<LoginPayload>(
-      "/oauth/token",
-      formData
-    )
+    const response = await authApi.post<LoginPayload>("/oauth/token", formData)
 
     const { access_token, refresh_token } = response.data
     tokenService.storeTokens({
       accessToken: access_token,
-      refreshToken: refresh_token
+      refreshToken: refresh_token,
     })
 
     // todo: Get current user
@@ -42,7 +38,6 @@ export const login = createAsyncThunk<
 
     return response.data
   } catch (ex) {
-    // console.error(ex)
     return rejectWithValue(getExceptionPayload(ex))
   }
 })
@@ -73,7 +68,7 @@ export const getMe = createAsyncThunk<
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  status: APIStatus.IDLE
+  status: APIStatus.IDLE,
 }
 
 const authSlice = createSlice({
@@ -91,7 +86,7 @@ const authSlice = createSlice({
     storeToken: (state, action: PayloadAction<IToken>) => {
       state.accessToken = action.payload.accessToken
       state.refreshToken = action.payload.refreshToken
-    }
+    },
   },
   extraReducers: builder => {
     builder.addCase(login.pending, state => {
@@ -118,7 +113,7 @@ const authSlice = createSlice({
     builder.addCase(getMe.rejected, state => {
       state.status = APIStatus.REJECTED
     })
-  }
+  },
 })
 
 export const { signOut, storeToken } = authSlice.actions

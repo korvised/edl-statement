@@ -13,9 +13,10 @@ export interface APIError {
 }
 
 export interface APIData<T> {
-  success?: boolean
+  timestamp: string
+  status: number
   message: string
-  code: number
+  reason: string
   data: T
 }
 
