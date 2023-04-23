@@ -32,6 +32,16 @@ export const routes: IRout[] = [
     isOnline: true,
   },
   {
+    path: "/customers",
+    name: "ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາ",
+    title: "ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາ",
+    description:
+      "ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາພາຍໃນແຂວງທີ່ໄດ້ອັບໂຫຼດຂົ້າລະບົບທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
+    icon: FiUsers,
+    authorizes: [USER],
+    isOnline: false,
+  },
+  {
     path: "/upload-history",
     name: "ປະຫວັດ",
     title: "ປະຫວັດການອັບໂຫຼດໄຟລ໌",

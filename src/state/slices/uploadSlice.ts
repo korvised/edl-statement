@@ -5,6 +5,7 @@ import { APIData, APIError, APIStatus } from "@/types/api.type"
 import { ICustomer, IUploadHistory, IUploadState } from "@/types/upload.type"
 import { AlertService } from "@/common/services"
 import { hideLoading, showLoading } from "@/state/slices/layoutSlice"
+import { RootState } from "@/state/store"
 
 const alertService = new AlertService()
 
@@ -15,9 +16,7 @@ export const getUploadHistories = createAsyncThunk<
 >("Upload/getUploadHistories", async (_, { dispatch, rejectWithValue }) => {
   try {
     dispatch(showLoading())
-    const { data } = await api.get<APIData<IUploadHistory[]>>(
-      "/upload-history"
-    )
+    const { data } = await api.get<APIData<IUploadHistory[]>>("/upload-history")
     dispatch(hideLoading())
 
     return data.data
@@ -59,18 +58,23 @@ export const getCustomersData = createAsyncThunk<
   ICustomer[],
   void,
   { rejectValue: APIError }
->("Upload/getCustomersData", async (_, { dispatch, rejectWithValue }) => {
-  try {
-    dispatch(showLoading())
-    const { data } = await api.post<APIData<ICustomer[]>>("/rp-data")
-    dispatch(hideLoading())
+>(
+  "Upload/getCustomersData",
+  async (_, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const customers = (getState() as RootState).upload.customers
+      if (customers.data.length === 0) dispatch(showLoading())
 
-    return data.data
-  } catch (ex) {
-    dispatch(hideLoading())
-    return rejectWithValue(getExceptionPayload(ex))
+      const { data } = await api.get<APIData<ICustomer[]>>("/rp-data")
+      dispatch(hideLoading())
+
+      return data.data
+    } catch (ex) {
+      dispatch(hideLoading())
+      return rejectWithValue(getExceptionPayload(ex))
+    }
   }
-})
+)
 
 const initialState: IUploadState = {
   histories: {

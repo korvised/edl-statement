@@ -6,10 +6,10 @@ import { IUploadHistory } from "@/types/upload.type"
 import { AppTitle, Breadcrumbs, DateTimeFormat } from "@/common/ui/components"
 import { Table } from "@/common/ui/table"
 import { Layout } from "@/common/ui/layout"
-import { getUploadHistories } from "@/state/slices/uploadSlice"
 import { DownloadFileCell } from "@/components/upload"
+import { getUploadHistories } from "@/state/slices/uploadSlice"
 
-function History() {
+export default function History() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -64,4 +64,3 @@ function History() {
   )
 }
 
-export default History
