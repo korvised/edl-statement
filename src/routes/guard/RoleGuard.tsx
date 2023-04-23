@@ -22,7 +22,7 @@ const RoleGuard: FC<Props> = ({ authorities, children }) => {
     auth.status === APIStatus.REJECTED ||
     (auth.status === APIStatus.FULFILLED && !auth.isAuthenticated)
   ) {
-    return <Navigate to="/sign-in" replace />
+    return <Navigate to="/" replace />
   }
 
   if (auth.user && !auth.user.roles?.some(role => authorities.includes(role))) {

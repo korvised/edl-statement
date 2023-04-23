@@ -17,8 +17,10 @@ export default function MainHeader() {
 
   const filteredRoutes = useMemo(
     () =>
-      routes.filter(route =>
-        route.authorizes.some(role => auth.user?.roles.includes(role))
+      routes.filter(
+        route =>
+          route.isOnline &&
+          route.authorizes.some(role => auth.user?.roles.includes(role))
       ),
     [auth.user]
   )

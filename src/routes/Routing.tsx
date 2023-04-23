@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import { AuthGuard } from "./guard"
+import { AuthGuard, RoleGuard } from "./guard"
 import { SignIn } from "@/pages/auth"
 import { NotFound, Unauthorized } from "@/pages/404"
-import { privateRoute } from "./const/privateRoute"
+import { authRoutes } from "./const/authRoutes"
+import { privateRoutes } from "./const/privateRoutes"
 
 export default function Routing() {
   return (
@@ -11,7 +12,7 @@ export default function Routing() {
       <Routes>
         <Route path="/" element={<SignIn />} />
 
-        {privateRoute.map(({ path, Component }) => (
+        {authRoutes.map(({ path, Component }) => (
           <Route
             key={path}
             path={path}
@@ -19,6 +20,18 @@ export default function Routing() {
               <AuthGuard>
                 <Component />
               </AuthGuard>
+            }
+          />
+        ))}
+
+        {privateRoutes.map(({ authorities, path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <RoleGuard authorities={authorities}>
+                <Component />
+              </RoleGuard>
             }
           />
         ))}

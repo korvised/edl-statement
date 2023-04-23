@@ -27,7 +27,7 @@ export const buttonBaseStyles: IButtonBaseStyle = {
 export const buttonVariantStyles: IButtonVariantStyle = {
   solid: {
     primary:
-      "relative overflow-hidden bg-teal-500 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-teal-600 active:text-white/80 before:transition-colors",
+      "relative overflow-hidden bg-teal-600 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-teal-600 active:text-white/80 before:transition-colors",
     dark: "relative overflow-hidden bg-black text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-gray-800 active:text-white/80 before:transition-colors",
     danger:
       "relative overflow-hidden bg-red-500 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-red-600 active:text-white/80 before:transition-colors",

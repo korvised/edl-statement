@@ -20,21 +20,13 @@ export const routes: IRout[] = [
     authorizes: [ADMIN],
     isOnline: true,
   },
-  {
-    path: "/statement",
-    name: "Statement",
-    title: "Statement",
-    description:
-      "ລາຍງານຂໍ້ມູນການຊໍາລະນໍ້າປະປາຜ່ານທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
-    icon: FaHandHoldingWater,
-    authorizes: [USER],
-    isOnline: true,
-  },
+
   {
     path: "/upload",
     name: "ອັບໂຫຼດໄຟລ໌",
     title: "ອັບໂຫຼດໄຟລ໌",
-    description: "ອັບໂຫຼດໄຟລ໌ຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ",
+    description:
+      "ອັບໂຫຼດໄຟລ໌ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາພາຍໃນແຂວງເຂົ້າລະບົບທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
     icon: FiUploadCloud,
     authorizes: [USER],
     isOnline: true,
@@ -43,8 +35,19 @@ export const routes: IRout[] = [
     path: "/upload-history",
     name: "ປະຫວັດ",
     title: "ປະຫວັດການອັບໂຫຼດໄຟລ໌",
-    description: "ປະຫວັດການອັບໂຫຼດໄຟລ໌ຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ",
+    description:
+      "ປະຫວັດການອັບໂຫຼດໄຟລ໌ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາຂົ້າລະບົບທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
     icon: BsClockHistory,
+    authorizes: [USER],
+    isOnline: false,
+  },
+  {
+    path: "/statement",
+    name: "Statement",
+    title: "Statement",
+    description:
+      "ລາຍງານຂໍ້ມູນການຊໍາລະນໍ້າປະປາຜ່ານທະນາຄານສົ່ງເສີມກະສິກໍາ ຈໍາກັດ.",
+    icon: FaHandHoldingWater,
     authorizes: [USER],
     isOnline: true,
   },

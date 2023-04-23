@@ -43,40 +43,42 @@ function SignInForm() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.container}>
-        <div className={classes.card}>
-          <div>
-            <img
-              className={classes.logo}
-              src="/apb-name.jpg"
-              alt="Your Company"
-            />
-            <h2 className={classes.title}>EDL Statement</h2>
-            <p className={classes.subtitle}>
-              ລະບົບລາຍງານທຸລະກໍາການຊໍາລະຄ່າໄຟຟ້າຜ່ານ ທສກ
-            </p>
-          </div>
+      <div className={classes.bg}/>
+      <div className={classes.main}>
+        <div className={classes.container}>
+          <div className={classes.card}>
+            <div>
+              <img
+                className={classes.logo}
+                src="/apb-name.jpg"
+                alt="Your Company"
+              />
+              <h2 className={classes.title}>APIS Water Supply</h2>
+              <p className={classes.subtitle}>
+                ລະບົບອັບໂຫຼດໄຟລ໌ຂໍ້ມູນນໍ້າປະປາເຂົ້າສູ່ລະບົບ ທສກ
+              </p>
+            </div>
 
-          <form className="mt-6 space-y-4" onSubmit={loginHandle}>
-            <TextFiled
-              id="username"
-              name="username"
-              label="Username"
-              autoComplete="none"
-              value={username}
-              onChange={handleChange}
-              required
-            />
+            <form className="mt-6 space-y-4" onSubmit={loginHandle}>
+              <TextFiled
+                id="username"
+                name="username"
+                label="Username"
+                autoComplete="none"
+                value={username}
+                onChange={handleChange}
+                required
+              />
 
-            <TextFiled
-              id="password"
-              type={isPassword ? "password" : "text"}
-              name="password"
-              label="ລະຫັດຜ່ານ"
-              value={password}
-              onChange={handleChange}
-              required
-            >
+              <TextFiled
+                id="password"
+                type={isPassword ? "password" : "text"}
+                name="password"
+                label="ລະຫັດຜ່ານ"
+                value={password}
+                onChange={handleChange}
+                required
+              >
               <span className={classes.toggle}>
                 <button
                   type="button"
@@ -86,19 +88,20 @@ function SignInForm() {
                   {isPassword ? <EyeIcon /> : <EyeSlashIcon />}
                 </button>
               </span>
-            </TextFiled>
+              </TextFiled>
 
-            <Button
-              type="submit"
-              variant="solid"
-              color="dark"
-              value={submitted ? "Loading..." : "ເຂົ້າສູ່ລະບົບ"}
-              className="mt-2 w-full"
-              disabled={submitted}
-            >
-              {submitted && <Spinner className="mr-4 text-white" />}
-            </Button>
-          </form>
+              <Button
+                type="submit"
+                variant="solid"
+                color="primary"
+                value={submitted ? "Loading..." : "ເຂົ້າສູ່ລະບົບ"}
+                className="mt-2 w-full"
+                disabled={submitted}
+              >
+                {submitted && <Spinner className="mr-4 text-white" />}
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

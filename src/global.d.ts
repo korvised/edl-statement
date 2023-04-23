@@ -4,3 +4,7 @@ declare interface Error {
   stack?: string
   code?: number | string
 }
+
+declare interface File {
+  url: string
+}
