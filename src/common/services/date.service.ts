@@ -43,7 +43,7 @@ export class DateService {
     const end = this.formatIOSDate(endDate)
 
     if (start === end) {
-      return "ວັນທີ " + this.formatLocaleDate(start)
+      return "ໃນວັນທີ " + this.formatLocaleDate(start)
     } else {
       return (
         "ລະຫວ່າງວັນທີ " +

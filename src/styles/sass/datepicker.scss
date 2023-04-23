@@ -1,0 +1,46 @@
+.react-datepicker {
+  @apply relative w-fit border-none px-2 pb-2 text-sm;
+
+  &__header {
+    @apply flex justify-center py-4 font-semibold text-gray-700;
+  }
+
+  &__navigation {
+    @apply absolute top-2 z-50 flex w-full justify-between bg-red-600 text-gray-500;
+
+    &--previous {
+      @apply left-4 flex h-8 w-8 items-center justify-center rounded transition hover:bg-gray-200;
+    }
+
+    &--next {
+      @apply right-4 flex h-8 w-8 items-center justify-center rounded transition hover:bg-gray-200;
+    }
+
+    &--previous:hover svg,
+    &--next:hover svg {
+      @apply text-gray-700;
+    }
+
+    &-icon svg {
+      @apply h-5 w-5;
+    }
+  }
+
+  &__year {
+    &--container {
+      @apply relative bg-white;
+    }
+
+    &-wrapper {
+      @apply grid w-full max-w-fit grid-cols-3 gap-2;
+    }
+
+    &-text {
+      @apply cursor-pointer rounded-full px-4 py-2 text-gray-600 transition hover:bg-gray-200;
+    }
+
+    &-text--selected {
+      @apply bg-teal-500 text-white hover:bg-teal-600;
+    }
+  }
+}

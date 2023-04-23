@@ -1,14 +1,14 @@
 import { FC, HTMLProps } from "react"
 
-type Props = { value: number | string } & HTMLProps<HTMLSpanElement>
+type Props = { value: number | string } & HTMLProps<HTMLDivElement>
 
 const NumberFormat: FC<Props> = ({ value, ...props }) => {
   return (
-    <span {...props}>
+    <div {...props}>
       {parseInt(value as string).toLocaleString(undefined, {
         maximumFractionDigits: 2,
       })}
-    </span>
+    </div>
   )
 }
 

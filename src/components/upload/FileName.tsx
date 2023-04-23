@@ -1,8 +1,7 @@
-import { XML } from "@/types/upload.type"
 import { NumberFormat } from "@/common/ui/components"
 
 interface Props {
-  selectedFile?: XML
+  selectedFile?: File
 }
 
 export function FileName({ selectedFile }: Props) {
@@ -16,12 +15,12 @@ export function FileName({ selectedFile }: Props) {
           <p>{selectedFile?.name || "N/A"}</p>
         </div>
 
-        <p className="px-2 py-1.5">
+        <div className="flex px-2 py-1.5">
           <NumberFormat
             value={selectedFile ? selectedFile.size / 1000000 : 0}
           />
-          <span className="pl-1">MB</span>
-        </p>
+          <p className="pl-1">MB</p>
+        </div>
       </div>
     </div>
   )

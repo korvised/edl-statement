@@ -3,12 +3,14 @@ import { configureStore } from "@reduxjs/toolkit"
 import LayoutSlice from "./slices/layoutSlice"
 import authSlice from "./slices/authSlice"
 import uploadSlice from "./slices/uploadSlice"
+import statementSlice from "./slices/statementSlice"
 
 export const store = configureStore({
   reducer: {
     layout: LayoutSlice,
     auth: authSlice,
     upload: uploadSlice,
+    statement: statementSlice,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware(),
 })

@@ -87,7 +87,7 @@ const initialState: IUploadState = {
   },
 }
 
-const authSlice = createSlice({
+const uploadSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
@@ -117,4 +117,4 @@ const authSlice = createSlice({
   },
 })
 
-export default authSlice.reducer
+export default uploadSlice.reducer
