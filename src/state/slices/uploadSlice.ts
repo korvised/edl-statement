@@ -15,7 +15,7 @@ export const getUploadHistories = createAsyncThunk<
 >("Upload/getUploadHistories", async (_, { dispatch, rejectWithValue }) => {
   try {
     dispatch(showLoading())
-    const { data } = await api.post<APIData<IUploadHistory[]>>(
+    const { data } = await api.get<APIData<IUploadHistory[]>>(
       "/upload-history"
     )
     dispatch(hideLoading())
