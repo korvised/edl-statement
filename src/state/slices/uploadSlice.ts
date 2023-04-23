@@ -1,12 +1,31 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import { api, getExceptionPayload } from "@/common/api"
-import { AuthState, IToken } from "@/types/auth.type"
 import { APIData, APIError, APIStatus } from "@/types/api.type"
-import { hideLoading, showLoading } from "@/state/slices/layoutSlice"
+import { ICustomer, IUploadHistory, IUploadState } from "@/types/upload.type"
 import { AlertService } from "@/common/services"
+import { hideLoading, showLoading } from "@/state/slices/layoutSlice"
 
 const alertService = new AlertService()
+
+export const getUploadHistories = createAsyncThunk<
+  IUploadHistory[],
+  void,
+  { rejectValue: APIError }
+>("Upload/getUploadHistories", async (_, { dispatch, rejectWithValue }) => {
+  try {
+    dispatch(showLoading())
+    const { data } = await api.post<APIData<IUploadHistory[]>>(
+      "/upload-history"
+    )
+    dispatch(hideLoading())
+
+    return data.data
+  } catch (ex) {
+    dispatch(hideLoading())
+    return rejectWithValue(getExceptionPayload(ex))
+  }
+})
 
 export const uploadFile = createAsyncThunk<
   APIData<null>,
@@ -36,31 +55,62 @@ export const uploadFile = createAsyncThunk<
   }
 })
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  status: APIStatus.IDLE,
+export const getCustomersData = createAsyncThunk<
+  ICustomer[],
+  void,
+  { rejectValue: APIError }
+>("Upload/getCustomersData", async (_, { dispatch, rejectWithValue }) => {
+  try {
+    dispatch(showLoading())
+    const { data } = await api.post<APIData<ICustomer[]>>("/rp-data")
+    dispatch(hideLoading())
+
+    return data.data
+  } catch (ex) {
+    dispatch(hideLoading())
+    return rejectWithValue(getExceptionPayload(ex))
+  }
+})
+
+const initialState: IUploadState = {
+  histories: {
+    status: APIStatus.IDLE,
+    data: [],
+  },
+  customers: {
+    status: APIStatus.IDLE,
+    data: [],
+  },
 }
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    storeToken: (state, action: PayloadAction<IToken>) => {
-      state.accessToken = action.payload.accessToken
-      state.refreshToken = action.payload.refreshToken
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
-    builder.addCase(uploadFile.pending, state => {
-      state.status = APIStatus.PENDING
+    builder.addCase(getUploadHistories.pending, state => {
+      state.histories.status = APIStatus.PENDING
     })
-    builder.addCase(uploadFile.fulfilled, (state, { payload }) => {})
-    builder.addCase(uploadFile.rejected, state => {
-      state.status = APIStatus.REJECTED
+    builder.addCase(getUploadHistories.fulfilled, (state, { payload }) => {
+      state.histories.status = APIStatus.FULFILLED
+      state.histories.data = payload
+    })
+    builder.addCase(getUploadHistories.rejected, (state, { payload }) => {
+      state.histories.status = APIStatus.REJECTED
+      state.histories.error = payload
+    })
+    builder.addCase(getCustomersData.pending, state => {
+      state.customers.status = APIStatus.PENDING
+    })
+    builder.addCase(getCustomersData.fulfilled, (state, { payload }) => {
+      state.customers.status = APIStatus.FULFILLED
+      state.customers.data = payload
+    })
+    builder.addCase(getCustomersData.rejected, (state, { payload }) => {
+      state.customers.status = APIStatus.REJECTED
+      state.customers.error = payload
     })
   },
 })
-
-export const { storeToken } = authSlice.actions
 
 export default authSlice.reducer

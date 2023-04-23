@@ -2,11 +2,10 @@ import { Fragment, useState } from "react"
 
 import { AppTitle, Breadcrumbs } from "@/common/ui/components"
 import { Layout } from "@/common/ui/layout"
-import { XML } from "@/types/upload.type"
 import { UploadForm } from "@/components/upload"
 
 export default function Upload() {
-  const [selectedFile, setSelectedFile] = useState<XML>()
+  const [selectedFile, setSelectedFile] = useState<File>()
 
   return (
     <Fragment>

@@ -1,5 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
+
 import { ILayoutState } from "@/types/layout.type"
 
 // Define the initial state using that type

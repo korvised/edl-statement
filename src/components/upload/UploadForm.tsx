@@ -4,14 +4,13 @@ import { AiOutlineCloudUpload, BsFiletypeXml } from "react-icons/all"
 import clsx from "clsx"
 
 import { useAppDispatch } from "@/state/hooks"
-import { XML } from "@/types/upload.type"
 import { Button } from "@/common/ui/button"
 import { FileName } from "./FileName"
 import { uploadFile } from "@/state/slices/uploadSlice"
 
 interface Props {
-  selectedFile?: XML
-  setSelectedFile: (selectedFile: XML) => void
+  selectedFile?: File
+  setSelectedFile: (selectedFile: File) => void
 }
 
 const buttonStyle =
