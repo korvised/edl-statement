@@ -1,4 +1,4 @@
-import Layout from "@/common/ui/layout"
+import { Layout } from "@/common/ui/layout"
 
 const people = [
   {

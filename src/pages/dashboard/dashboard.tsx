@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from "react"
 
 import { useAppSelector } from "@/state/hooks"
-import Layout from "@/common/ui/layout"
+import { Layout } from "@/common/ui/layout"
 import { AppTitle } from "@/common/ui/components"
 import { MenuSection, UserInfoSection } from "@/components/dashboard"
 import { routes } from "@/config/routes"

@@ -13,9 +13,9 @@ export const layoutSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    showLoading: (state, action: PayloadAction<string>) => {
+    showLoading: (state, action: PayloadAction<string | undefined>) => {
       state.showLoading = true
-      state.loadingMsg = action.payload
+      state.loadingMsg = action.payload || "Loading..."
     },
     hideLoading: state => {
       state.showLoading = false

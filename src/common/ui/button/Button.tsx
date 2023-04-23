@@ -18,11 +18,13 @@ const Button: FC<ButtonProps> = ({
   children,
   className,
   value,
+  disabled,
   type = "button",
   ...props
 }) => {
   className = clsx(
     "font-lao",
+    disabled && "pointer-events-none opacity-70 brightness-50",
     buttonBaseStyles[variant],
     buttonVariantStyles[variant][color],
     className
