@@ -1,56 +1,57 @@
+import { Fragment } from "react"
+
 import { Layout } from "@/common/ui/layout"
+import { AppTitle, Breadcrumbs } from "@/common/ui/components"
 
 const people = [
   {
-    name: "Whitney Francis",
-    role: "Copywriter",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-    bio: "Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.",
+    name: "ປະຫວັດຄວາມເປັນມາ",
+    role: "ຄວາມເປັນມາຂອງທະນາຄາສົ່ງເສີມກະສະກໍາ ຈໍາກັດ",
+    imageUrl: "https://www.apb.com.la/images/35.jpg",
+    bio: "ທະນາຄານ​ສົ່ງເສີມ​ກະສິກຳ ​ສ້າງ​ຕັ້ງຂຶ້ນ​ຕາມດຳ​ລັດ​ຂອງ​ນາຍົກ​ລັດຖະ​ມົນຕີ ​ເລກ​ທີ ​92/ນ​ຍ ​ລົງ​ວັນ​ທີ ​19 ​ມິຖຸນາ ​1993, ​ໃຊ້​ຕົວ​ອັກ​ສອນ​ຫຍໍ້ ​“ທສກ” ​ເປັນ​ທະນາຄານ​ພັດທະນາ​ຕາມ​ຂະແໜງການ ​ເປັນ​ອົງການ​ນິຕິ​ບຸກຄົນ ​ໂດຍ​ມີຈຸດ​ປະສົງ​ເພື່ອ​ສະໜອງ​ສິນ​ເຊື່ອ ​ເຂົ້າໃນການ​ພັດທະນາ​ຂະແໜງ​ການ​ກະສິກຳ-ປ່າໄມ້ ​ເປັນ​ຕົ້ນຕໍ, ​ດຳເນີນ​ທຸລະກິດ​ໂດຍ​ບໍ່​ສະ​ແຫວງ​ຫາ​ຜົນ​ກຳໄລ, ​ສະໜອງ​ສິນເຊື່ອ​ດ້ວຍ​ອັດຕາ​ດອກ​ເບ້ຍຕໍ່າ​ໃຫ້​ຊາວ​ກະສິກອນ​ທັງເປັນລາຍກຸ່ມ ​ແລະ ​ລາຍ​ບຸກຄົນ ​ດ້ວຍ​ແຫຼ່ງ​ທຶນ​ຂອງ​ລັດຖະບານ ​ແລະ ​ອົງການ​ຕ່າງໆ​ສະໜອງ​ໃຫ້, ​ທສກ ​ໃນ​ເວລາ​ນັ້ນ​ບໍ່ໄດ້ເຮັດ​ໜ້າທີ່ລະ ​ດົມ​ເງິນ​ຝາກ, ​ດ​ຳເນີນ​ງານພາຍ​ໃຕ້ລະບຽບ​ຄຸ້ມຄອງ​ທີ່ແຕກ​ຕ່າງ​ຈາກ​ສະຖາ​ບັນ​ການ​ເງິນ​ອື່ນ. ​ມີທຶນ​ຈົດ​ທະ​ບຽນ​ເບື້ອງ​ຕົ້ນ​ທັງ​ໝົດ 1​,​000​,000​,000​ ​ກີບ ​(ໜຶ່ງຕື້ກີບ) ​ແບ່ງເປັນ ​1,000,000 ​ຮຸ້ນ, ​ຮຸ້ນລະ ​1,000 ​ກີບ.",
   },
   // More people...
 ]
 
 export default function About() {
   return (
-    <Layout>
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-24">
-        <div className="space-y-12">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Meet our leadership
-          </h2>
-
-          <ul
-            role="list"
-            className="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
-          >
-            {people.map(person => (
-              <li key={person.name}>
-                <div className="space-y-4 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0 lg:gap-8">
-                  <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4 h-0">
-                    <img
-                      className="rounded-lg object-cover shadow-lg"
-                      src={person.imageUrl}
-                      alt=""
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <div className="space-y-4">
-                      <div className="space-y-1 text-lg font-medium leading-6">
-                        <h3>{person.name}</h3>
-                        <p className="text-indigo-600">{person.role}</p>
-                      </div>
-                      <div className="text-lg">
-                        <p className="text-gray-500">{person.bio}</p>
+    <Fragment>
+      <AppTitle title="About us" />
+      <Layout>
+        <Breadcrumbs name="ກ່ຽວກັບພວກເຮົາ" />
+        <section className="section-md py-6">
+          <div className="mt-4 space-y-8">
+            <ul role="list" className="space-y-12">
+              {people.map(person => (
+                <li key={person.name}>
+                  <div className="space-y-4 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0 lg:gap-8">
+                    <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4 min-h-fit">
+                      <img
+                        className="rounded-lg object-cover shadow-lg"
+                        src={person.imageUrl}
+                        alt=""
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <div className="space-y-4">
+                        <div className="space-y-1 text-lg font-medium leading-6">
+                          <h3 className="text-3xl font-extrabold">
+                            {person.name}
+                          </h3>
+                          <p className="text-teal-600">{person.role}</p>
+                        </div>
+                        <div className="text-base">
+                          <p className="text-gray-500">{person.bio}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </Layout>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </Layout>
+    </Fragment>
   )
 }
