@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { useAppSelector } from "@/state/hooks"
+
 import { HeroSection } from "@/components/dashboard"
 import { Navigation } from "./Navigation"
+import { ChangePassword } from "./ChangePassword"
+import { EditProfile } from "./EditProfile"
 
 export default function ProfileInfo() {
   const [openEdit, setOpenEdit] = useState(false)
@@ -13,22 +16,35 @@ export default function ProfileInfo() {
     setOpenEdit(true)
   }
 
+  const handleCloseEdit = () => {
+    setOpenEdit(false)
+  }
+
   const handleOpenReset = () => {
     setOpenReset(true)
   }
 
-  return user ? (
-    <div className="reletive overflow-hidden rounded-lg border">
-      <HeroSection
-        accountNumber={user.accountNumber}
-        provinceName={user.nameLa}
-      />
+  const handleCloseReset = () => {
+    setOpenReset(false)
+  }
 
-      <Navigation
-        user={user}
-        handleOpenEdit={handleOpenEdit}
-        handleOpenReset={handleOpenReset}
-      />
-    </div>
+  return user ? (
+    <Fragment>
+      <EditProfile open={openEdit} user={user} onClose={handleCloseEdit} />
+      <ChangePassword open={openReset} onClose={handleCloseReset} />
+
+      <div className="reletive overflow-hidden rounded-lg border">
+        <HeroSection
+          accountNumber={user.accountNumber}
+          provinceName={user.nameLa}
+        />
+
+        <Navigation
+          user={user}
+          handleOpenEdit={handleOpenEdit}
+          handleOpenReset={handleOpenReset}
+        />
+      </div>
+    </Fragment>
   ) : null
 }

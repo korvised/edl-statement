@@ -4,12 +4,12 @@ import clsx from "clsx"
 import { baseTextFiledStyle } from "@/styles/input.style"
 
 type TextFiledProps = {
-  isError?: boolean | string | false | undefined
+  isInvalid?: boolean | string | false | undefined
   errorMsg?: string
   children?: ReactNode
 } & HTMLProps<HTMLInputElement>
 const Filed: FC<TextFiledProps> = ({
-  isError,
+  isInvalid,
   errorMsg,
   children,
   id,
@@ -20,7 +20,7 @@ const Filed: FC<TextFiledProps> = ({
 }) => {
   className = clsx(
     baseTextFiledStyle,
-    isError ? "border-red-300" : "border-gray-300",
+    isInvalid ? "border-red-300" : "border-gray-300",
     className
   )
 
@@ -39,7 +39,7 @@ const Filed: FC<TextFiledProps> = ({
         {children}
       </div>
 
-      {isError && errorMsg && (
+      {isInvalid && errorMsg && (
         <p className="ml-1 mt-1 font-lao text-sm text-red-500">{errorMsg}</p>
       )}
     </div>

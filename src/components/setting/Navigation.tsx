@@ -26,7 +26,7 @@ export function Navigation({ user, handleOpenEdit, handleOpenReset }: Props) {
 
             <div className="flex items-center gap-x-2">
               <BiPhone className="h-5 w-5 text-gray-500" />
-              <p className="text-sm text-gray-600">{user.fullName}</p>
+              <p className="text-sm text-gray-600">{user.tel}</p>
             </div>
           </div>
 

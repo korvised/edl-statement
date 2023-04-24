@@ -30,7 +30,7 @@ export const buttonVariantStyles: IButtonVariantStyle = {
       "relative overflow-hidden bg-teal-600 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-teal-600 active:text-white/80 before:transition-colors",
     dark: "relative overflow-hidden bg-black text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-gray-800 active:text-white/80 before:transition-colors",
     danger:
-      "relative overflow-hidden bg-red-500 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-red-600 active:text-white/80 before:transition-colors",
+      "relative overflow-hidden bg-rose-500 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-rose-600 active:text-white/80 before:transition-colors",
     cyan: "relative overflow-hidden bg-cyan-500 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-cyan-600 active:text-white/80 before:transition-colors",
     white:
       "bg-white text-cyan-900 hover:bg-white/90 active:bg-white/90 active:text-cyan-900/70",
@@ -41,7 +41,7 @@ export const buttonVariantStyles: IButtonVariantStyle = {
       "border-teal-300 text-teal-700 hover:border-teal-400 active:bg-teal-100 active:text-teal-700/80",
     dark: "border-gray-800 text-gray-700 hover:border-black hover:bg-black hover:text-white active:bg-gray-200 active:text-gray-900",
     danger:
-      "border-red-300 text-red-700 hover:border-red-400 active:bg-red-100 active:text-red-700/80",
+      "border-rose-300 text-rose-700 hover:border-rose-400 active:bg-rose-100 active:text-rose-700/80",
     cyan: "border-teal-300 text-teal-700 hover:border-teal-400 active:bg-teal-100 active:text-teal-700/80 hover:bg-teal-500 hover:text-white",
     white:
       "border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-zinc-100 active:bg-gray-100 active:text-gray-700/80 bg-white",
