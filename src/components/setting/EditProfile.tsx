@@ -1,5 +1,7 @@
 import { ChangeEvent, FormEvent, useMemo, useState } from "react"
 
+import { useAppDispatch } from "@/state/hooks"
+import { updateProfile } from "@/state/slices"
 import { IProfileForm } from "@/types/setting.type"
 import { Modal } from "@/common/ui/modal"
 import { TextFiled } from "@/common/ui/field"
@@ -16,6 +18,8 @@ interface Props {
 }
 
 export function EditProfile({ open, user, onClose }: Props) {
+  const dispatch = useAppDispatch()
+
   const initialValues: IProfileForm = useMemo(
     () => ({
       fullName: user.fullName,
@@ -59,7 +63,9 @@ export function EditProfile({ open, user, onClose }: Props) {
           tel: tel.trim(),
         }
 
-        console.log(body)
+        const res = await dispatch(updateProfile(body)).unwrap()
+
+        if (res && res.status === 200) handleClose()
       }
     } else {
       await alertService.warning("ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນກ່ອນ!")

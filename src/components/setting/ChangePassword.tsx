@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useMemo, useState } from "react"
 
-import { IResetPasswordBody, IResetPasswordForm } from "@/types/setting.type"
+import { IChangePasswordBody, IChangePasswordForm } from "@/types/setting.type"
+import { useAppDispatch } from "@/state/hooks"
+import { changePassword } from "@/state/slices"
 import { Modal } from "@/common/ui/modal"
 import { TextFiled } from "@/common/ui/field"
 import { Button } from "@/common/ui/button"
@@ -13,14 +15,16 @@ interface Props {
   onClose: () => void
 }
 
-const initialValues: IResetPasswordForm = {
+const initialValues: IChangePasswordForm = {
   currentPassword: "",
   newPassword: "",
   confirmNewPassword: "",
 }
 
 export function ChangePassword({ open, onClose }: Props) {
-  const [form, setForm] = useState<IResetPasswordForm>(initialValues)
+  const dispatch = useAppDispatch()
+
+  const [form, setForm] = useState<IChangePasswordForm>(initialValues)
 
   const { currentPassword, newPassword, confirmNewPassword } = form
 
@@ -62,11 +66,14 @@ export function ChangePassword({ open, onClose }: Props) {
       )
 
       if (isConfirmed) {
-        const body: IResetPasswordBody = {
+        const body: IChangePasswordBody = {
           currentPassword,
           newPassword,
         }
-        console.log(body)
+
+        const res = await dispatch(changePassword(body)).unwrap()
+
+        if (res && res.status === 200) handleClose()
       }
     }
   }

@@ -3,11 +3,11 @@ export interface IProfileForm {
   tel: string
 }
 
-export interface IResetPasswordBody {
+export interface IChangePasswordBody {
   currentPassword: string
   newPassword: string
 }
 
-export interface IResetPasswordForm extends IResetPasswordBody {
+export interface IChangePasswordForm extends IChangePasswordBody {
   confirmNewPassword: string
 }

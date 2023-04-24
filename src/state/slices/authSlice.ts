@@ -1,23 +1,20 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
-import {
-  AuthBody,
-  AuthState,
-  IAuthUser,
-  IToken,
-  LoginPayload,
-} from "@/types/auth.type"
+import { AuthBody, AuthState, IAuthUser, LoginPayload } from "@/types/auth.type"
 import { APIData, APIError, APIStatus } from "@/types/api.type"
 import { api, authApi, getExceptionPayload } from "@/common/api"
-import { TokenService } from "@/common/services"
+import { AlertService, TokenService } from "@/common/services"
+import { IChangePasswordBody, IProfileForm } from "@/types/setting.type"
+import { hideLoading, showLoading } from "@/state/slices/layoutSlice"
 
+const alertService = new AlertService()
 const tokenService = new TokenService()
 
 export const login = createAsyncThunk<
   LoginPayload,
   AuthBody,
   { rejectValue: APIError }
->("SignIn/login", async (body, { dispatch, rejectWithValue }) => {
+>("Auth/login", async (body, { dispatch, rejectWithValue }) => {
   try {
     // console.log(body)
     // todo: Create authenticate form data
@@ -47,7 +44,7 @@ export const getMe = createAsyncThunk<
   IAuthUser | undefined,
   void,
   { rejectValue: APIError }
->("SignIn/getMe", async (_, { rejectWithValue }) => {
+>("Auth/getMe", async (_, { rejectWithValue }) => {
   try {
     const accessToken = tokenService.getAccessToken()
 
@@ -63,6 +60,52 @@ export const getMe = createAsyncThunk<
 
     return undefined
   } catch (ex) {
+    return rejectWithValue(getExceptionPayload(ex))
+  }
+})
+
+export const updateProfile = createAsyncThunk<
+  APIData<null>,
+  IProfileForm,
+  { rejectValue: APIError }
+>("Auth/updateProfile", async (body, { rejectWithValue, dispatch }) => {
+  try {
+    dispatch(showLoading("ກຳລັງແກ້ໄຂຂໍ້ມູນ..."))
+    const { data } = await api.post<APIData<null>>("/modify", body)
+
+    dispatch(hideLoading())
+
+    if (data.status === 200) {
+      await dispatch(getMe())
+      await alertService.success("ກຳລັງແກ້ໄຂຂໍ້ມູນສຳເລັດ")
+    }
+
+    return data
+  } catch (ex) {
+    dispatch(hideLoading())
+    return rejectWithValue(getExceptionPayload(ex))
+  }
+})
+
+export const changePassword = createAsyncThunk<
+  APIData<null>,
+  IChangePasswordBody,
+  { rejectValue: APIError }
+>("Auth/changePassword", async (body, { rejectWithValue, dispatch }) => {
+  try {
+    dispatch(showLoading("ກຳລັງແກ້ໄຂຂໍ້ມູນ..."))
+    const { data } = await api.post<APIData<null>>("/reset-pass", body)
+
+    dispatch(hideLoading())
+
+    if (data.status === 200) {
+      await dispatch(signOut())
+      await alertService.success("ເພື່ອຄວາມປອດໄພກະລຸນາເຂົ້າສູ່ລະບົບໃໝ່ຄັ້ງ")
+    }
+
+    return data
+  } catch (ex) {
+    dispatch(hideLoading())
     return rejectWithValue(getExceptionPayload(ex))
   }
 })
@@ -83,10 +126,6 @@ const authSlice = createSlice({
       state.user = undefined
       // todo: Remove JWT Tokens
       tokenService.removeTokens()
-    },
-    storeToken: (state, action: PayloadAction<IToken>) => {
-      state.accessToken = action.payload.accessToken
-      state.refreshToken = action.payload.refreshToken
     },
   },
   extraReducers: builder => {
@@ -117,6 +156,6 @@ const authSlice = createSlice({
   },
 })
 
-export const { signOut, storeToken } = authSlice.actions
+export const { signOut } = authSlice.actions
 
 export default authSlice.reducer
