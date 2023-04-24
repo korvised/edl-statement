@@ -7,6 +7,7 @@ import statementSlice from "./slices/statementSlice"
 import userSlice from "./slices/userSlice"
 
 import provinceApiSlice from "./queries/provinceApiSlice"
+import userApiSlice from "./queries/userApiSlice"
 
 export const store = configureStore({
   reducer: {
@@ -16,9 +17,12 @@ export const store = configureStore({
     statement: statementSlice,
     user: userSlice,
     [provinceApiSlice.reducerPath]: provinceApiSlice.reducer,
+    [userApiSlice.reducerPath]: userApiSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(provinceApiSlice.middleware),
+    getDefaultMiddleware()
+      .concat(provinceApiSlice.middleware)
+      .concat(userApiSlice.middleware),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

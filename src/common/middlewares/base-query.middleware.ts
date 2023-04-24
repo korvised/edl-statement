@@ -5,7 +5,7 @@ import { api } from "@/common/api"
 interface IAxiosParams {
   url: string
   method: AxiosRequestConfig["method"] | Method
-  data?: AxiosRequestConfig["data"]
+  body?: AxiosRequestConfig["data"]
   params?: AxiosRequestConfig["params"]
 }
 
@@ -19,8 +19,8 @@ export const baseQuery: BaseQueryFn<
 
     switch (type) {
       case "object": {
-        const { url, method, data, params } = args as IAxiosParams
-        const result = await api({ url, method, data, params })
+        const { url, method, body, params } = args as IAxiosParams
+        const result = await api({ url, method, data: body, params })
         return { data: result.data }
       }
       default: {

@@ -29,3 +29,16 @@ export interface RoleEntity {
   id: number
   name: string
 }
+
+export interface IUserBody {
+  fullName: string
+  username: string
+  password: string
+  tel: string
+  provinceId: string
+}
+
+export interface UserParams {
+  id: number
+  body: Partial<IUserBody>
+}

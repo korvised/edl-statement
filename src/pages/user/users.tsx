@@ -1,33 +1,27 @@
-import { Fragment, useEffect, useMemo } from "react"
+import { Fragment, useMemo, useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { PlusSmallIcon } from "@heroicons/react/24/solid"
-
-import { useAppDispatch, useAppSelector } from "@/state/hooks"
 import { IUser } from "@/types/user.type"
-import { APIStatus } from "@/types/api.type"
 import {
   AppTitle,
   Breadcrumbs,
   DateTimeFormat,
   Empty,
+  Loading,
 } from "@/common/ui/components"
 import { Layout } from "@/common/ui/layout"
-import { getUsers } from "@/state/slices/userSlice"
 import { fuzzyFilter, Table } from "@/common/ui/table"
 import { ButtonGroup, StatusCell, StatusFilter } from "@/components/user"
 import { Button } from "@/common/ui/button"
 import { useGetProvincesQuery } from "@/state/queries/provinceApiSlice"
+import { useGetUsersQuery } from "@/state/queries/userApiSlice"
+import NewUser from "@/components/user/NewUser"
 
 export default function Users() {
-  const dispatch = useAppDispatch()
+  const [open, setOpen] = useState(false)
 
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
-
-  const { data: provinces = [] } = useGetProvincesQuery()
-
-  const user = useAppSelector(state => state.user)
+  const { data: provinces = [], isLoading: proLoading } = useGetProvincesQuery()
+  const { data: users = [], isLoading } = useGetUsersQuery()
 
   const columns = useMemo<ColumnDef<IUser, any>[]>(
     () => [
@@ -87,11 +81,21 @@ export default function Users() {
     []
   )
 
-  const data = useMemo(() => user.data, [user.data])
+  const data = useMemo(() => users, [users])
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
     <Fragment>
+      {proLoading && isLoading && data.length === 0 && <Loading />}
       <AppTitle title="Users | ຈັດການຂໍ້ມູນຜູ້ໃຂ້" />
+      <NewUser open={open} provinces={provinces} onClose={handleClose} />
       <Layout>
         <Breadcrumbs name="ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ" />
         <section className="section-md pb-6 pt-2">
@@ -100,6 +104,7 @@ export default function Users() {
               variant="solid"
               color="primary"
               value="ລົງທະບຽນໃໝ່"
+              onClick={handleOpen}
               className="gap-x-1"
             >
               <PlusSmallIcon className="h-5 w-5" />
@@ -107,7 +112,7 @@ export default function Users() {
           </div>
           {data.length > 0 && <Table data={data} columns={columns} />}
 
-          {user.status !== APIStatus.IDLE && data.length === 0 && (
+          {data.length === 0 && (
             <Empty text="ຍັງບໍ່ທັນມີຂໍ້ມູນຜູ້ໃຊ້ງານ" className="pt-5" />
           )}
         </section>
