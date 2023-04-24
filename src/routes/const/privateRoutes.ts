@@ -2,6 +2,7 @@ import { IPrivateRout } from "@/types/layout.type"
 import { UserRole } from "@/types/auth.type"
 import { Upload, UploadCustomers, UploadHistory } from "@/pages/upload"
 import { Statement } from "@/pages/statement"
+import { Users } from "@/pages/user"
 
 const { ADMIN, USER } = UserRole
 
@@ -10,4 +11,5 @@ export const privateRoutes: IPrivateRout[] = [
   { path: "/upload-history", Component: UploadHistory, authorities: [USER] },
   { path: "/customers", Component: UploadCustomers, authorities: [USER] },
   { path: "/statement", Component: Statement, authorities: [USER] },
+  { path: "/users", Component: Users, authorities: [ADMIN] },
 ]

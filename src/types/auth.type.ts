@@ -43,6 +43,6 @@ export interface IAuthUser {
   accountLocked: boolean
   tel: string
   roles: UserRole[]
-  nameLa: string
-  accountNumber: string
+  nameLa?: string
+  accountNumber?: string
 }

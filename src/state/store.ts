@@ -4,6 +4,9 @@ import LayoutSlice from "./slices/layoutSlice"
 import authSlice from "./slices/authSlice"
 import uploadSlice from "./slices/uploadSlice"
 import statementSlice from "./slices/statementSlice"
+import userSlice from "./slices/userSlice"
+
+import provinceApiSlice from "./queries/provinceApiSlice"
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +14,11 @@ export const store = configureStore({
     auth: authSlice,
     upload: uploadSlice,
     statement: statementSlice,
+    user: userSlice,
+    [provinceApiSlice.reducerPath]: provinceApiSlice.reducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware(),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(provinceApiSlice.middleware),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

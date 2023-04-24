@@ -16,9 +16,7 @@ import { Table } from "@/common/ui/table"
 import { StatementFilter } from "@/components/statement"
 
 export default function Statement() {
-  const { data, filter, dateText, status } = useAppSelector(
-    state => state.statement
-  )
+  const statement = useAppSelector(state => state.statement)
 
   const columns = useMemo<ColumnDef<IStatement, any>[]>(
     () => [
@@ -55,7 +53,7 @@ export default function Statement() {
     []
   )
 
-  const array = useMemo(() => data, [data])
+  const data = useMemo(() => statement.data, [statement.data])
 
   return (
     <Fragment>
@@ -65,11 +63,11 @@ export default function Statement() {
         <section className="section-md space-y-3 py-6">
           <StatementFilter />
 
-          {array.length > 0 && <Table data={array} columns={columns} />}
+          {data.length > 0 && <Table data={data} columns={columns} />}
 
-          {status !== APIStatus.IDLE && array.length === 0 && (
+          {statement.status !== APIStatus.IDLE && data.length === 0 && (
             <Empty
-              text={`ຍັງບໍ່ທັນມີຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ${dateText}`}
+              text={`ຍັງບໍ່ທັນມີຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາ${statement.dateText}`}
               className="pt-5"
             />
           )}

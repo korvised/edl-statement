@@ -25,10 +25,12 @@ export default function UserInfoSection({ user }: Props) {
         </div>
       </div>
 
-      <HeroSection
-        accountNumber={user.accountNumber}
-        provinceName={user.nameLa}
-      />
+      <div className="overflow-hidden rounded-lg">
+        <HeroSection
+          accountNumber={user.accountNumber}
+          provinceName={user.nameLa}
+        />
+      </div>
     </div>
   )
 }
