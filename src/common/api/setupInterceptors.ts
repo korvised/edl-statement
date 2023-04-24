@@ -9,6 +9,8 @@ import {
 
 import { APIData } from "@/types/api.type"
 import { AlertService, TokenService } from "@/common/services"
+import { store } from "@/state/store"
+import { signOut } from "@/state/slices"
 
 const alertService = new AlertService()
 const tokenService = new TokenService()
@@ -89,7 +91,8 @@ const onErrorResponse = async (
 
     if (status === 401) {
       // Delete Token & Go To Login Page if you required.
-      tokenService.removeTokens()
+      store.dispatch(signOut())
+      // tokenService.removeTokens()
     }
   } else {
     if (typeof ex !== "object" || !ex) {
