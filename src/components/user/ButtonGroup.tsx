@@ -1,11 +1,17 @@
 import { FC, Fragment, useState } from "react"
-import { EditIconButton, LockIconButton } from "@/common/ui/button"
+import {
+  EditIconButton,
+  LockIconButton,
+  ResetPassIconButton,
+} from "@/common/ui/button"
 
 import { IUser } from "@/types/user.type"
 import { IProvince } from "@/types/province.type"
 import { useUpdateStatusMutation } from "@/state/queries/userApiSlice"
 import { AlertService } from "@/common/services"
 import { Loading } from "@/common/ui/components"
+import { ResetPassword } from "@/components/user/ResetPassword"
+import { EditUser } from "@/components/user/EditUser"
 
 const alertService = new AlertService()
 
@@ -14,10 +20,11 @@ interface Props {
   provinces: IProvince[]
 }
 
-const ButtonGroup: FC<Props> = ({ row }) => {
-  const [open, setOpen] = useState(false)
+const ButtonGroup: FC<Props> = ({ row: user, provinces }) => {
+  const [openEdit, setOpenEdit] = useState(false)
+  const [openReset, setOpenReset] = useState(false)
 
-  const { id, accountLocked: isActive } = row
+  const { id, accountLocked: isActive } = user
 
   const [updateStatus, { isLoading }] = useUpdateStatusMutation()
 
@@ -35,17 +42,38 @@ const ButtonGroup: FC<Props> = ({ row }) => {
     }
   }
 
+  const handleOpenEdit = () => {
+    setOpenEdit(true)
+  }
+  const handleCloseEdit = () => {
+    setOpenEdit(false)
+  }
+
+  const handleOpenReset = () => {
+    setOpenReset(true)
+  }
+  const handleCloseReset = () => {
+    setOpenReset(false)
+  }
+
   return (
     <Fragment>
       {isLoading && <Loading />}
-      {/*<UpdateUser roles={roles} user={row} open={open} setOpen={setOpen} />*/}
+      <ResetPassword id={id} open={openReset} onClose={handleCloseReset} />
+      <EditUser
+        open={openEdit}
+        user={user}
+        provinces={provinces}
+        onClose={handleCloseEdit}
+      />
       <div className="flex items-center justify-center gap-x-2">
         <LockIconButton
           id={`reset-${id}`}
           status={isActive}
           onClick={handleUpdateStatus}
         />
-        <EditIconButton id={`update-${id}`} onClick={() => setOpen(true)} />
+        <ResetPassIconButton id={`update-${id}`} onClick={handleOpenReset} />
+        <EditIconButton id={`update-${id}`} onClick={handleOpenEdit} />
       </div>
     </Fragment>
   )

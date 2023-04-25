@@ -1,6 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
+
 import { baseQuery } from "@/common/middlewares"
-import { IUser, IUserBody, UserParams } from "@/types/user.type"
+import {
+  IResetUserPasswordParams,
+  IUser,
+  IUserBody,
+  IEditUserParams,
+} from "@/types/user.type"
 import { APIData } from "@/types/api.type"
 
 const userApiSlice = createApi({
@@ -21,7 +27,7 @@ const userApiSlice = createApi({
       }),
       invalidatesTags: ["User"],
     }),
-    updateUser: builder.mutation<APIData<IUser>, UserParams>({
+    updateUser: builder.mutation<APIData<IUser>, IEditUserParams>({
       query: ({ id, body }) => ({
         url: `/users/update/${id}`,
         method: "PUT",
@@ -33,6 +39,11 @@ const userApiSlice = createApi({
       query: id => `lock-or-unlock/${id}`,
       invalidatesTags: ["User"],
     }),
+    resetPassword: builder.mutation<APIData<IUser>, IResetUserPasswordParams>({
+      query: ({ id, newPassword }) =>
+        `change-pass/${id}?newPassword=${newPassword}`,
+      invalidatesTags: ["User"],
+    }),
   }),
 })
 
@@ -41,5 +52,6 @@ export const {
   useRegisterUserMutation,
   useUpdateUserMutation,
   useUpdateStatusMutation,
+  useResetPasswordMutation,
 } = userApiSlice
 export default userApiSlice

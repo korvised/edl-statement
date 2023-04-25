@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, Fragment, useMemo, useState } from "react"
 
-import { IUserBody } from "@/types/user.type"
+import { IEditUserBody, IEditUserParams, IUser } from "@/types/user.type"
 import { IProvince } from "@/types/province.type"
-import { useRegisterUserMutation } from "@/state/queries/userApiSlice"
+import { useUpdateUserMutation } from "@/state/queries/userApiSlice"
 import { Modal } from "@/common/ui/modal"
 import { TextFiled } from "@/common/ui/field"
 import { Button } from "@/common/ui/button"
@@ -15,33 +15,33 @@ const alertService = new AlertService()
 interface Props {
   open: boolean
   provinces: IProvince[]
+  user: IUser
   onClose: () => void
 }
 
-const initialValues: IUserBody = {
-  fullName: "",
-  tel: "",
-  username: "",
-  password: "",
-  provinceId: "",
-}
+export function EditUser({ open, provinces, user, onClose }: Props) {
+  const initialValues: IEditUserBody = useMemo(
+    () => ({
+      fullName: user.fullName,
+      tel: user.tel,
+      provinceId: user.provinceId,
+    }),
+    [user]
+  )
 
-export default function NewUser({ open, provinces, onClose }: Props) {
-  const [form, setForm] = useState<IUserBody>(initialValues)
+  const [form, setForm] = useState<IEditUserBody>(initialValues)
 
-  const { fullName, tel, username, password, provinceId } = form
+  const { fullName, tel, provinceId } = form
 
   const invalidForm = useMemo(
     () =>
-      fullName.trim().length < 1 ||
-      tel.trim().length < 1 ||
-      username.trim().length < 2 ||
-      password.trim().length < 4 ||
+      fullName.trim().length < 3 ||
+      tel.trim().length < 5 ||
       provinceId.trim().length < 1,
     [form]
   )
 
-  const [registerUser, { isLoading }] = useRegisterUserMutation()
+  const [updateUser, { isLoading }] = useUpdateUserMutation()
 
   const handleClose = () => {
     onClose()
@@ -67,15 +67,18 @@ export default function NewUser({ open, provinces, onClose }: Props) {
       )
 
       if (isConfirmed) {
-        const body: IUserBody = {
+        const body: IEditUserBody = {
           fullName: fullName.trim(),
           tel: tel.trim(),
-          username: username.trim(),
-          password: password.trim(),
           provinceId: provinceId.trim(),
         }
 
-        const res = await registerUser(body).unwrap()
+        const params: IEditUserParams = {
+          id: user.id,
+          body: body,
+        }
+
+        const res = await updateUser(params).unwrap()
 
         if (res && res.status === 200) {
           handleClose()
@@ -119,27 +122,6 @@ export default function NewUser({ open, provinces, onClose }: Props) {
             value={tel}
             minLength={5}
             maxLength={15}
-            onChange={handleChange}
-            required
-          />
-
-          <TextFiled
-            id="username"
-            name="username"
-            label="Username"
-            value={username}
-            minLength={2}
-            onChange={handleChange}
-            required
-          />
-
-          <TextFiled
-            id="password"
-            name="password"
-            label="ລະຫັດຜ່ານ"
-            minLength={4}
-            maxLength={15}
-            value={password}
             onChange={handleChange}
             required
           />

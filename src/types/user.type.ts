@@ -30,15 +30,23 @@ export interface RoleEntity {
   name: string
 }
 
-export interface IUserBody {
+export interface IEditUserBody {
   fullName: string
-  username: string
-  password: string
   tel: string
   provinceId: string
 }
 
-export interface UserParams {
+export interface IUserBody extends IEditUserBody {
+  username: string
+  password: string
+}
+
+export interface IEditUserParams {
   id: number
-  body: Partial<IUserBody>
+  body: IEditUserBody
+}
+
+export interface IResetUserPasswordParams {
+  id: number
+  newPassword: string
 }
