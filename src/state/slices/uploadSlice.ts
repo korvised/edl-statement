@@ -37,6 +37,14 @@ export const uploadFile = createAsyncThunk<
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      // onUploadProgress: progressEvent => {
+      //   const { loaded, total = 0 } = progressEvent
+      //   console.log(total)
+      //   let percent = Math.floor((loaded * 100) / total)
+      //   if (percent < 100) {
+      //     console.log(`${loaded} bytes of ${total} bytes. ${percent}%`)
+      //   }
+      // },
     })
 
     dispatch(hideLoading())

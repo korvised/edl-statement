@@ -1,9 +1,13 @@
 .root {
-  @apply relative;
+  @apply relative font-lao;
 }
 
 .bg {
   @apply min-h-screen min-w-screen bg-auth bg-cover bg-center bg-no-repeat brightness-50 contrast-50 blur-sm;
+}
+
+.footer {
+  @apply z-10 text-black;
 }
 
 .main {

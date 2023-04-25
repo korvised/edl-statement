@@ -7,6 +7,7 @@ import { AuthBody } from "@/types/auth.type"
 import { Spinner } from "@/common/ui/components"
 import { Button } from "@/common/ui/button"
 import { TextFiled } from "@/common/ui/field"
+import { Footer } from "./footer"
 import classes from "./signIn-form.module.scss"
 
 function SignInForm() {
@@ -107,6 +108,7 @@ function SignInForm() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
