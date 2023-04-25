@@ -91,7 +91,7 @@ export function EditUser({ open, provinces, user, onClose }: Props) {
   return (
     <Fragment>
       {isLoading && <Loading />}
-      <Modal title="ລົງທະບຽນຜູ້ໃຊ້" open={open} className="max-w-sm">
+      <Modal title="ແກ້ໄຂຂໍ້ມູນຜູ້ໃຊ້" open={open} className="max-w-sm">
         <form className="space-y-3 font-lao" onSubmit={handleSubmit}>
           <div className="space-y-1">
             <label className="block font-lao text-sm font-medium text-gray-700">

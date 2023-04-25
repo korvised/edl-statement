@@ -64,7 +64,7 @@ export function ResetPassword({ id, open, onClose }: Props) {
   return (
     <Fragment>
       {isLoading && <Loading />}
-      <Modal title="ລົງທະບຽນຜູ້ໃຊ້" open={open} className="max-w-sm">
+      <Modal title="ປ່ຽນລະຫັດຜ່ານ" open={open} className="max-w-sm">
         <form className="space-y-3 font-lao" onSubmit={handleSubmit}>
           <TextFiled
             id="newPassword"

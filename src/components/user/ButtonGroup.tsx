@@ -68,11 +68,11 @@ const ButtonGroup: FC<Props> = ({ row: user, provinces }) => {
       />
       <div className="flex items-center justify-center gap-x-2">
         <LockIconButton
-          id={`reset-${id}`}
+          id={`lock-${id}`}
           status={isActive}
           onClick={handleUpdateStatus}
         />
-        <ResetPassIconButton id={`update-${id}`} onClick={handleOpenReset} />
+        <ResetPassIconButton id={`reset-${id}`} onClick={handleOpenReset} />
         <EditIconButton id={`update-${id}`} onClick={handleOpenEdit} />
       </div>
     </Fragment>

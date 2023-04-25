@@ -72,7 +72,7 @@ export default function NewUser({ open, provinces, onClose }: Props) {
           tel: tel.trim(),
           username: username.trim(),
           password: password.trim(),
-          provinceId: provinceId.trim(),
+          provinceId: provinceId,
         }
 
         const res = await registerUser(body).unwrap()

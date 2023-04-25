@@ -33,7 +33,10 @@ function SignInForm() {
     e.preventDefault()
 
     if (username && password) {
-      const authBody: AuthBody = { username, password }
+      const authBody: AuthBody = {
+        username: username.trim(),
+        password: password.trim(),
+      }
 
       setSubmitted(true)
       await dispatch(login(authBody))
@@ -43,7 +46,7 @@ function SignInForm() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.bg}/>
+      <div className={classes.bg} />
       <div className={classes.main}>
         <div className={classes.container}>
           <div className={classes.card}>
@@ -79,15 +82,15 @@ function SignInForm() {
                 onChange={handleChange}
                 required
               >
-              <span className={classes.toggle}>
-                <button
-                  type="button"
-                  className={classes.toggle__icon}
-                  onClick={toggleShowPassword}
-                >
-                  {isPassword ? <EyeIcon /> : <EyeSlashIcon />}
-                </button>
-              </span>
+                <span className={classes.toggle}>
+                  <button
+                    type="button"
+                    className={classes.toggle__icon}
+                    onClick={toggleShowPassword}
+                  >
+                    {isPassword ? <EyeIcon /> : <EyeSlashIcon />}
+                  </button>
+                </span>
               </TextFiled>
 
               <Button

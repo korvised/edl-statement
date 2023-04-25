@@ -94,7 +94,7 @@ export default function Users() {
   return (
     <Fragment>
       {proLoading && isLoading && data.length === 0 && <Loading />}
-      <AppTitle title="Users | ຈັດການຂໍ້ມູນຜູ້ໃຂ້" />
+      <AppTitle title="Users | ຈັດການຂໍ້ມູນຜູ້ໃຊ້" />
       <NewUser open={open} provinces={provinces} onClose={handleClose} />
       <Layout>
         <Breadcrumbs name="ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ" />

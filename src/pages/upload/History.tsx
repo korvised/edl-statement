@@ -7,6 +7,7 @@ import {
   AppTitle,
   Breadcrumbs,
   DateTimeFormat,
+  Empty,
   Loading,
 } from "@/common/ui/components"
 import { Table } from "@/common/ui/table"
@@ -56,6 +57,9 @@ export default function History() {
       <Layout>
         <Breadcrumbs name="ປະຫວັດການອັບໂຫຼດໄຟລ໌" />
         <section className="section-md py-6">
+          {!isLoading && data.length === 0 && (
+            <Empty text="ຍັງບໍ່ທັນມີປະຫວັດການອັບໂຫຼດຂໍ້ມູນເຂົ້າລະບົບຂອງ ທສກ" />
+          )}
           {data.length > 0 && <Table data={data} columns={columns} />}
         </section>
       </Layout>

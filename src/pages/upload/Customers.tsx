@@ -6,9 +6,9 @@ import { ICustomer } from "@/types/upload.type"
 import { useGetUploadDataQuery } from "@/state/queries/uploadApiSlice"
 import {
   AppTitle,
-  Breadcrumbs,
+  Breadcrumbs, Empty,
   Loading,
-  NumberFormat,
+  NumberFormat
 } from "@/common/ui/components"
 import { Table } from "@/common/ui/table"
 import { Layout } from "@/common/ui/layout"
@@ -63,6 +63,9 @@ export default function Customers() {
       <Layout>
         <Breadcrumbs name="ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາ" />
         <section className="section-md py-6">
+          {!isLoading && data.length === 0 && (
+            <Empty text="ຍັງບໍ່ມີຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາໃນແຂວງຂອງທ່ານຢູ່ໃນລະບົບຂອງ ທສກ" />
+          )}
           {data.length > 0 && <Table data={data} columns={columns} />}
         </section>
       </Layout>
