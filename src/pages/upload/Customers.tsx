@@ -1,22 +1,20 @@
-import { Fragment, useEffect, useMemo } from "react"
-import { useAppDispatch, useAppSelector } from "@/state/hooks"
+import { Fragment, useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
-
-import { ICustomer } from "@/types/upload.type"
-import { AppTitle, Breadcrumbs, NumberFormat } from "@/common/ui/components"
-import { Table } from "@/common/ui/table"
-import { Layout } from "@/common/ui/layout"
-import { getCustomersData } from "@/state/slices/uploadSlice"
 import clsx from "clsx"
 
+import { ICustomer } from "@/types/upload.type"
+import { useGetUploadDataQuery } from "@/state/queries/uploadApiSlice"
+import {
+  AppTitle,
+  Breadcrumbs,
+  Loading,
+  NumberFormat,
+} from "@/common/ui/components"
+import { Table } from "@/common/ui/table"
+import { Layout } from "@/common/ui/layout"
+
 export default function Customers() {
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(getCustomersData())
-  }, [dispatch])
-
-  const { customers } = useAppSelector(state => state.upload)
+  const { data: customers = [], isLoading } = useGetUploadDataQuery()
 
   const columns = useMemo<ColumnDef<ICustomer, any>[]>(
     () => [
@@ -56,15 +54,16 @@ export default function Customers() {
     []
   )
 
-  const data = useMemo(() => customers.data, [customers])
+  const data = useMemo(() => customers, [customers])
 
   return (
     <Fragment>
-      <AppTitle title="Upload History" />
+      {isLoading && data.length === 0 && <Loading />}
+      <AppTitle title="Water supply's customers" />
       <Layout>
-        <Breadcrumbs name="ປະຫວັດການອັບໂຫຼດໄຟລ໌" />
+        <Breadcrumbs name="ຂໍ້ມູນຜູ້ຊົມໃຊ້ນໍ້າປະປາ" />
         <section className="section-md py-6">
-          {data && <Table data={data} columns={columns} />}
+          {data.length > 0 && <Table data={data} columns={columns} />}
         </section>
       </Layout>
     </Fragment>

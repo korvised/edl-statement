@@ -1,22 +1,20 @@
-import { Fragment, useEffect, useMemo } from "react"
-import { useAppDispatch, useAppSelector } from "@/state/hooks"
+import { Fragment, useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 
 import { IUploadHistory } from "@/types/upload.type"
-import { AppTitle, Breadcrumbs, DateTimeFormat } from "@/common/ui/components"
+import { useGetUploadHistoriesQuery } from "@/state/queries/uploadApiSlice"
+import {
+  AppTitle,
+  Breadcrumbs,
+  DateTimeFormat,
+  Loading,
+} from "@/common/ui/components"
 import { Table } from "@/common/ui/table"
 import { Layout } from "@/common/ui/layout"
 import { DownloadFileCell } from "@/components/upload"
-import { getUploadHistories } from "@/state/slices/uploadSlice"
 
 export default function History() {
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(getUploadHistories())
-  }, [dispatch])
-
-  const { histories } = useAppSelector(state => state.upload)
+  const { data: histories = [], isLoading } = useGetUploadHistoriesQuery()
 
   const columns = useMemo<ColumnDef<IUploadHistory, any>[]>(
     () => [
@@ -49,18 +47,18 @@ export default function History() {
     []
   )
 
-  const data = useMemo(() => histories.data, [histories])
+  const data = useMemo(() => histories, [histories])
 
   return (
     <Fragment>
+      {isLoading && data.length === 0 && <Loading />}
       <AppTitle title="Upload History" />
       <Layout>
         <Breadcrumbs name="ປະຫວັດການອັບໂຫຼດໄຟລ໌" />
         <section className="section-md py-6">
-          {data && <Table data={data} columns={columns} />}
+          {data.length > 0 && <Table data={data} columns={columns} />}
         </section>
       </Layout>
     </Fragment>
   )
 }
-

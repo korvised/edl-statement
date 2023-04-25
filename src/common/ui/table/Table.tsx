@@ -23,10 +23,10 @@ import {
 import { rankItem } from "@tanstack/match-sorter-utils"
 import clsx from "clsx"
 
+import { CustomFilterMeta } from "@/types/table.type"
 import { pagination as getPages } from "@/common/utils"
 import { ColumnFilter, PageOption } from "./components/Filter"
-import DebouncedInput from "./components/DebouncedInput"
-import { CustomFilterMeta } from "@/types/table.type"
+import { DebouncedInput } from "./components"
 
 export const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item

@@ -6,20 +6,17 @@ import { baseQuery } from "@/common/middlewares"
 const uploadApiSlice = createApi({
   reducerPath: "uploadApiSlice",
   baseQuery: baseQuery,
-  tagTypes: ["upload"],
+  tagTypes: ["data", "history"],
   endpoints: builder => ({
-    getUploadHistories: builder.query<IUploadHistory[], void>({
-      query: () => "/upload-history",
-      providesTags: [{ type: "upload", id: "LIST" }],
-      transformResponse: (response: APIData<IUploadHistory[]>) => {
-        console.log(response)
-        return response.data
-      },
-    }),
     getUploadData: builder.query<ICustomer[], void>({
       query: () => "/rp-data",
-      providesTags: [{ type: "upload", id: "LIST" }],
+      providesTags: [{ type: "data", id: "LIST" }],
       transformResponse: (response: APIData<ICustomer[]>) => response.data,
+    }),
+    getUploadHistories: builder.query<IUploadHistory[], void>({
+      query: () => "/upload-history",
+      providesTags: [{ type: "history", id: "LIST" }],
+      transformResponse: (response: APIData<IUploadHistory[]>) => response.data,
     }),
   }),
 })

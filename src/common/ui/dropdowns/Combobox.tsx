@@ -41,7 +41,7 @@ const Combobox: FC<Props<any>> = ({
                     key={option}
                     className={({ active }) =>
                       clsx(
-                        active ? "bg-black text-white" : "text-gray-900",
+                        active ? "bg-teal-500 text-white" : "text-gray-900",
                         "relative cursor-default select-none py-2 pl-8 pr-4"
                       )
                     }
