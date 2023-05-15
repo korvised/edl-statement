@@ -8,7 +8,7 @@ import { Layout } from "@/common/ui/layout"
 import {
   AppTitle,
   Breadcrumbs,
-  DateTimeFormat,
+  DateFormat,
   Empty,
   NumberFormat,
 } from "@/common/ui/components"
@@ -25,19 +25,24 @@ export default function Statement() {
         header: "ລ/ດ",
       },
       {
-        accessorKey: "numcli",
+        accessorKey: "transId",
+        cell: info => info.getValue(),
+        header: "ລະຫັດທຸລະກຳ",
+      },
+      {
+        accessorKey: "billNumber",
         cell: info => info.getValue(),
         header: "ເລກທີ່ຊົມໃຊ້",
       },
       {
-        accessorKey: "nomsoc",
+        accessorKey: "billName",
         cell: info => info.getValue(),
         header: "ຊື່ຜູ້ຊົມໃຊ້",
       },
       {
-        accessorKey: "kcbTx",
+        accessorKey: "fromAcctNumber",
         cell: info => info.getValue(),
-        header: "kcbTx",
+        header: "ໂອນຈາກບັນຊີ",
       },
       {
         accessorKey: "amount",
@@ -45,8 +50,8 @@ export default function Statement() {
         header: "ຈໍານວນ ( ກີບ )",
       },
       {
-        accessorKey: "datePayment",
-        cell: info => <DateTimeFormat date={info.getValue()} />,
+        accessorKey: "createAt",
+        cell: info => <DateFormat date={info.getValue()} />,
         header: "ວັນທີ່",
       },
     ],

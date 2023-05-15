@@ -16,7 +16,7 @@ export const getStatement = createAsyncThunk<
   IStatement[],
   IStatementFilter,
   { rejectValue: APIError }
->("Upload/getUploadHistories", async (body, { dispatch, rejectWithValue }) => {
+>("statement/getStatement", async (body, { dispatch, rejectWithValue }) => {
   try {
     dispatch(showLoading())
 
@@ -42,7 +42,7 @@ const initialState: IStatementState = {
 }
 
 const statementSlice = createSlice({
-  name: "auth",
+  name: "statement",
   initialState,
   reducers: {
     updateFilter: (state, action: PayloadAction<IStatementFilter>) => {

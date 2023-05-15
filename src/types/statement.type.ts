@@ -14,10 +14,26 @@ export interface IStatementFilter {
 }
 
 export interface IStatement {
-  numcli: string
-  nomsoc: string
+  createdDate: string
+  lastModifiedDate: string
+  id: number
+  billNumber: string
+  billName: string
+  orgAmount: number
   amount: number
-  tellerId: string
-  datePayment: string
-  kcbTx: string
+  fee: number
+  teller: string
+  fromAcctNumber: string
+  fromAcctName: string
+  toAcctNumber: string
+  channel: string
+  transType: string
+  resultCode: string
+  resultMsg: string
+  transId: string
+  statusWs: boolean
+  statusTrans: string
+  branchId: string
+  statusRefund: boolean
+  createAt: string
 }

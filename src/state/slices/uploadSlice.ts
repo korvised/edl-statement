@@ -96,7 +96,7 @@ const initialState: IUploadState = {
 }
 
 const uploadSlice = createSlice({
-  name: "auth",
+  name: "upload",
   initialState,
   reducers: {},
   extraReducers: builder => {

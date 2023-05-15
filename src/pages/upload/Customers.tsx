@@ -6,9 +6,11 @@ import { ICustomer } from "@/types/upload.type"
 import { useGetUploadDataQuery } from "@/state/queries/uploadApiSlice"
 import {
   AppTitle,
-  Breadcrumbs, Empty,
+  Breadcrumbs,
+  DateFormat,
+  Empty,
   Loading,
-  NumberFormat
+  NumberFormat,
 } from "@/common/ui/components"
 import { Table } from "@/common/ui/table"
 import { Layout } from "@/common/ui/layout"
@@ -23,17 +25,17 @@ export default function Customers() {
         header: "ລ/ດ",
       },
       {
-        accessorKey: "numcli",
+        accessorKey: "billNumber",
         cell: info => info.getValue(),
         header: "ເລກທີ່ຊົມໃຊ້",
       },
       {
-        accessorKey: "nomsoc",
+        accessorKey: "billName",
         cell: info => info.getValue(),
         header: "ຊື່ຜູ້ຊົມໃຊ້",
       },
       {
-        accessorKey: "debt",
+        accessorKey: "debit",
         cell: info => (
           <NumberFormat
             value={info.getValue()}
@@ -46,8 +48,8 @@ export default function Customers() {
         header: "ຍອດໜີ້ ( ກີບ )",
       },
       {
-        accessorKey: "billdate",
-        cell: info => info.getValue(),
+        accessorKey: "billDate",
+        cell: info => <DateFormat date={info.getValue()} />,
         header: "ວັນທີ່",
       },
     ],

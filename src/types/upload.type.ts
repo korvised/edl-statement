@@ -28,8 +28,12 @@ export interface IUploadHistory {
 }
 
 export interface ICustomer {
-  numcli: string
-  nomsoc: string
-  debt: number
-  billdate: string
+  createdDate: string
+  lastModifiedDate: string
+  billNumber: string
+  billName: string
+  debit: number
+  billDate: string
+  provinceCode: string
+  provinceName: string
 }
