@@ -4,10 +4,12 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { DatePicker } from "@/common/ui/date"
 import { Button } from "@/common/ui/button"
 import { useAppDispatch, useAppSelector } from "@/state/hooks"
-import { getTransactions, updateDebitTranFilter } from "@/state/slices"
+import { getDebitTransactions, updateDebitTranFilter } from "@/state/slices"
 import { APIStatus } from "@/types/api.type"
 import { AlertService, DateService } from "@/common/services"
-import { ITransactionFilter } from "@/types/debit.type"
+import { IDebitTransFilter } from "@/types/debit.type"
+import { Link } from "react-router-dom"
+import { BsClockHistory } from "react-icons/all"
 
 const alertService = new AlertService()
 const dateService = new DateService()
@@ -20,14 +22,14 @@ function TransactionFilter() {
 
   const handleSearchReport = async () => {
     if (filter) {
-      dispatch(getTransactions(filter))
+      dispatch(getDebitTransactions(filter))
     } else {
       await alertService.warning("ກະລຸນາເລືອກວັນທີກ່ອນ!")
     }
   }
 
   const handleFilterChange = (date: Date) => {
-    const filter: ITransactionFilter = {
+    const filter: IDebitTransFilter = {
       curDate: dateService.formatIOSDate(date),
     }
 
@@ -57,6 +59,17 @@ function TransactionFilter() {
             <MagnifyingGlassIcon className="h-5 w-5" />
           </Button>
         </div>
+
+        <Link to="/debit-histories">
+          <Button
+            variant="outline"
+            color="white"
+            value="ປະຫວັດການສ້າງໄຟລ໌ຕັດໜີ້"
+            className="gap-x-2"
+          >
+            <BsClockHistory className="h-4 w-4" />
+          </Button>
+        </Link>
       </div>
 
       {status === APIStatus.IDLE && !filter && (

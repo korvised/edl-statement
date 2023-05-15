@@ -1,4 +1,4 @@
-import * as FileSaver from "file-saver"
+import { saveAs } from "file-saver"
 
 import { api, getExceptionPayload } from "@/common/api"
 import { AlertService } from "@/common/services"
@@ -12,7 +12,7 @@ export class UploadService {
         responseType: "blob",
       })
 
-      FileSaver.saveAs(res.data, `${fileName}.xml`)
+      saveAs(res.data, `${fileName}.xml`)
     } catch (ex) {
       const error = getExceptionPayload(ex)
       await alertService.error(error.error || "Error")

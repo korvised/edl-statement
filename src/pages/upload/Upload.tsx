@@ -28,7 +28,7 @@ export default function Upload() {
               </Button>
             </Link>
 
-            <Link to="/upload-history">
+            <Link to="/upload-histories">
               <Button
                 variant="outline"
                 color="white"

@@ -5,14 +5,15 @@ import { APIData, APIError, APIStatus } from "@/types/api.type"
 import {
   IDebitHistory,
   IDebitState,
+  IDebitTransFilter,
   ITransaction,
-  ITransactionFilter,
 } from "@/types/debit.type"
 import { hideLoading, showLoading } from "@/state/slices/layoutSlice"
+import { saveAs } from "file-saver"
 
-export const getTransactions = createAsyncThunk<
+export const getDebitTransactions = createAsyncThunk<
   ITransaction[],
-  ITransactionFilter,
+  IDebitTransFilter,
   { rejectValue: APIError }
 >("Debit/getTransactions", async (body, { dispatch, rejectWithValue }) => {
   try {
@@ -51,6 +52,26 @@ export const getDebitHistories = createAsyncThunk<
   }
 })
 
+export const downloadDebitXML = createAsyncThunk<void, IDebitTransFilter>(
+  "Debit/getDebitHistories",
+  async (filter, { dispatch }) => {
+    try {
+      dispatch(showLoading())
+      const { data, status } = await api.post("/download", filter, {
+        responseType: "blob",
+      })
+
+      if (status === 200) dispatch(getDebitTransactions(filter))
+
+      dispatch(hideLoading())
+
+      saveAs(data, `apb-trans-${filter.curDate}.xml`)
+    } catch (ex) {
+      dispatch(hideLoading())
+    }
+  }
+)
+
 const initialState: IDebitState = {
   transaction: {
     status: APIStatus.IDLE,
@@ -68,7 +89,7 @@ const debitSlice = createSlice({
   reducers: {
     updateDebitTranFilter: (
       state,
-      action: PayloadAction<ITransactionFilter>
+      action: PayloadAction<IDebitTransFilter>
     ) => {
       state.transaction.filter = action.payload
     },
@@ -80,14 +101,14 @@ const debitSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(getTransactions.pending, state => {
+    builder.addCase(getDebitTransactions.pending, state => {
       state.transaction.status = APIStatus.PENDING
     })
-    builder.addCase(getTransactions.fulfilled, (state, { payload }) => {
+    builder.addCase(getDebitTransactions.fulfilled, (state, { payload }) => {
       state.transaction.status = APIStatus.FULFILLED
       state.transaction.data = payload
     })
-    builder.addCase(getTransactions.rejected, (state, { payload }) => {
+    builder.addCase(getDebitTransactions.rejected, (state, { payload }) => {
       state.transaction.status = APIStatus.REJECTED
       state.transaction.error = payload
     })

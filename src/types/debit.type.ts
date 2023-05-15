@@ -15,13 +15,13 @@ export interface IDebitHistoryState {
 export interface ITransactionState {
   status: APIStatus
   filteredText?: string
-  filter?: ITransactionFilter
+  filter?: IDebitTransFilter
   data: ITransaction[]
   error?: APIError
 }
 
-export interface ITransactionFilter {
-  curDate?: string
+export interface IDebitTransFilter {
+  curDate: string
 }
 
 export type ITransaction = IStatement

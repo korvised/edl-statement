@@ -1,7 +1,7 @@
 import { IPrivateRout } from "@/types/layout.type"
 import { UserRole } from "@/types/auth.type"
 import { Upload, UploadHistories, WSCustomers } from "@/pages/upload"
-import { Debit, DebitHistories } from "@/pages/debit"
+import { DebitHistories, DebitTransactions } from "@/pages/debit"
 import { Statement } from "@/pages/statement"
 import { Users } from "@/pages/user"
 
@@ -14,7 +14,7 @@ export const privateRoutes: IPrivateRout[] = [
     Component: UploadHistories,
     authorities: [USER],
   },
-  { path: "/debit", Component: Debit, authorities: [USER] },
+  { path: "/debit", Component: DebitTransactions, authorities: [USER] },
   { path: "/debit-histories", Component: DebitHistories, authorities: [USER] },
   { path: "/customers", Component: WSCustomers, authorities: [USER] },
   { path: "/statement", Component: Statement, authorities: [USER] },

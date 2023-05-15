@@ -17,11 +17,12 @@ import { Table } from "@/common/ui/table"
 import { APIStatus } from "@/types/api.type"
 import { AlertService, DateService } from "@/common/services"
 import { Button } from "@/common/ui/button"
+import { downloadDebitXML } from "@/state/slices"
 
 const alertService = new AlertService()
 const dateService = new DateService()
 
-export default function Debit() {
+export default function DebitTransactions() {
   const dispatch = useAppDispatch()
 
   const { transaction } = useAppSelector(state => state.debit)
@@ -77,13 +78,16 @@ export default function Debit() {
   )
 
   const handleDownload = useCallback(async () => {
-    const result = await alertService.confirmModal(
-      "ຫຼັງຈາກສ້າງໄຟລ໌ແລ້ວຂໍ້ມູນທຸລະກຳທີ່ຖືກສ້າງເປັນໄຟລ໌ XML ຈະຫາຍໄປ"
-    )
-    if (result.isConfirmed) {
-      console.log("handleDownload")
+    if (transaction.filter) {
+      const result = await alertService.confirmModal(
+        "ຫຼັງຈາກສ້າງໄຟລ໌ແລ້ວຂໍ້ມູນທຸລະກຳທີ່ຖືກສ້າງເປັນໄຟລ໌ XML ຈະຫາຍໄປ"
+      )
+      if (result.isConfirmed) {
+        console.log("handleDownload")
+        dispatch(downloadDebitXML(transaction.filter))
+      }
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <Fragment>
