@@ -12,8 +12,8 @@ export default function Link({ path, label }: Props) {
       to={path}
       className={({ isActive }) =>
         clsx(
-          isActive ? "text-black" : "text-gray-600 hover:text-gray-900",
-          "text-sm font-medium"
+          isActive ? "text-black" : "text-gray-500 hover:text-gray-900",
+          "sm:text-sm font-medium"
         )
       }
     >

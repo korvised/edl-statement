@@ -56,15 +56,26 @@ const onErrorResponse = async (
   ex: AxiosError<APIData<null>> | Error
 ): Promise<AxiosError> => {
   if (isAxiosError(ex)) {
-    const { message: statusCode, reason: message } = ex.response?.data
+    // const { message: statusCode, reason: message } = ex.response?.data
+    const statusCode =
+      ex.response?.data?.message || ex?.code || ex?.message || "404"
+    const message =
+      ex.response?.data?.reason || ex?.message || "Something went wrong"
+
     const { method, url } = ex.config as AxiosRequestConfig
-    const { status } = (ex.response as AxiosResponse) ?? {}
+    const { status = -500 } = (ex.response as AxiosResponse) ?? {}
 
     logOnDev(
       `🚨 [API] ${method?.toUpperCase()} ${url} | Error ${status} "${statusCode}" ${message}`
     )
 
-    await alertService.error(message)
+    if (ex?.code === "ERR_NETWORK") {
+      await alertService.error(
+        "ການເຊື່ອມຕໍ່ຂັດຂ້ອງກະລຸນາກວດສອບອິນເຕີເນັດຂອງທ່ານແລ້ວລອງໃໝ່ອີກຄັ້ງ!"
+      )
+    } else {
+      await alertService.error(message)
+    }
 
     switch (status) {
       case 401: {
@@ -93,6 +104,9 @@ const onErrorResponse = async (
       // Delete Token & Go To Login Page if you required.
       store.dispatch(signOut())
       // tokenService.removeTokens()
+    }
+
+    if (ex.message) {
     }
   } else {
     if (typeof ex !== "object" || !ex) {
