@@ -1,24 +1,15 @@
+import clsx from "clsx"
 import { FC, Fragment, useMemo } from "react"
 import { Popover, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid"
 import { DateRange, Range, RangeKeyDict } from "react-date-range"
-import clsx from "clsx"
 
 import { DateFormat } from "@/common/ui/components"
+import { datepickerStyle } from "@/styles/input.style"
 
 import "@/styles/sass/date_range.scss"
 
 const rangeColors = ["#14b8a6", "#0d9488", "#0f766e"]
-
-const styles = {
-  base: "relative inline-flex items-center justify-between rounded-md border bg-white py-2 pl-3 pr-2 text-base",
-  status: {
-    enabled:
-      "hover:text-opacity-100 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 text-gray-600",
-    disabled: "bg-zinc-100 text-gray-500",
-    invalid: "border-red-300 focus:border-gray-200",
-  },
-}
 
 interface Props {
   startDate?: string
@@ -48,9 +39,11 @@ const DateRangePicker: FC<Props> = ({
   const className = useMemo(
     () =>
       clsx(
-        styles.base,
-        disabled ? styles.status.disabled : styles.status.enabled,
-        invalid && styles.status.invalid,
+        datepickerStyle.base,
+        disabled
+          ? datepickerStyle.status.disabled
+          : datepickerStyle.status.enabled,
+        invalid && datepickerStyle.status.invalid,
         minWidth ? `w-[${minWidth}rem]` : "w-full"
       ),
     [minWidth, disabled]
@@ -79,12 +72,18 @@ const DateRangePicker: FC<Props> = ({
             </p>
             {open ? (
               <ChevronUpIcon
-                className="ml-2 h-5 w-5 text-zinc-800 transition duration-150 ease-in-out group-hover:text-opacity-80"
+                className={clsx(
+                  datepickerStyle.arrowIcon.base,
+                  datepickerStyle.arrowIcon.up
+                )}
                 aria-hidden="true"
               />
             ) : (
               <ChevronDownIcon
-                className="ml-2 h-5 w-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-opacity-80"
+                className={clsx(
+                  datepickerStyle.arrowIcon.base,
+                  datepickerStyle.arrowIcon.down
+                )}
                 aria-hidden="true"
               />
             )}

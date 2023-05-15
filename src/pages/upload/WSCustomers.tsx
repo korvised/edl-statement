@@ -1,8 +1,8 @@
+import clsx from "clsx"
 import { Fragment, useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
-import clsx from "clsx"
 
-import { ICustomer } from "@/types/upload.type"
+import { IWSCustomer } from "@/types/upload.type"
 import { useGetUploadDataQuery } from "@/state/queries/uploadApiSlice"
 import {
   AppTitle,
@@ -15,10 +15,10 @@ import {
 import { Table } from "@/common/ui/table"
 import { Layout } from "@/common/ui/layout"
 
-export default function Customers() {
+export default function WSCustomers() {
   const { data: customers = [], isLoading } = useGetUploadDataQuery()
 
-  const columns = useMemo<ColumnDef<ICustomer, any>[]>(
+  const columns = useMemo<ColumnDef<IWSCustomer, any>[]>(
     () => [
       {
         cell: ({ row }) => row.index + 1,

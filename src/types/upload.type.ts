@@ -13,7 +13,7 @@ export interface IUploadHistoryState {
 
 export interface IUploadCustomerState {
   status: APIStatus
-  data: ICustomer[]
+  data: IWSCustomer[]
   error?: APIError
 }
 
@@ -27,7 +27,7 @@ export interface IUploadHistory {
   createdDate: string
 }
 
-export interface ICustomer {
+export interface IWSCustomer {
   createdDate: string
   lastModifiedDate: string
   billNumber: string

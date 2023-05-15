@@ -6,9 +6,9 @@ import "@/styles/sass/sweetAlert.scss"
 const MySwal = withReactContent(Swal)
 
 export class AlertService {
-  confirmModal(text: string) {
+  confirmModal(text: string, title?: string) {
     return MySwal.fire({
-      title: "ຢືນຢັນ",
+      title: title || "ຢືນຢັນ",
       text: text,
       icon: "question",
       showCancelButton: true,

@@ -1,3 +1,3 @@
 export { default as Upload } from "./Upload"
-export { default as UploadCustomers } from "./Customers"
-export { default as UploadHistory } from "./History"
+export { default as WSCustomers } from "./WSCustomers"
+export { default as UploadHistories } from "./UploadHistories"

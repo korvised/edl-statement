@@ -14,7 +14,7 @@ import { Table } from "@/common/ui/table"
 import { Layout } from "@/common/ui/layout"
 import { DownloadFileCell } from "@/components/upload"
 
-export default function History() {
+export default function UploadHistories() {
   const { data: histories = [], isLoading } = useGetUploadHistoriesQuery()
 
   const columns = useMemo<ColumnDef<IUploadHistory, any>[]>(

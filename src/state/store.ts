@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import LayoutSlice from "./slices/layoutSlice"
 import authSlice from "./slices/authSlice"
 import uploadSlice from "./slices/uploadSlice"
+import debitSlice from "./slices/debitSlice"
 import statementSlice from "./slices/statementSlice"
 import userSlice from "./slices/userSlice"
 
@@ -15,6 +16,7 @@ export const store = configureStore({
     layout: LayoutSlice,
     auth: authSlice,
     upload: uploadSlice,
+    debit: debitSlice,
     statement: statementSlice,
     user: userSlice,
     [userApiSlice.reducerPath]: userApiSlice.reducer,

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import { api, getExceptionPayload } from "@/common/api"
 import { APIData, APIError, APIStatus } from "@/types/api.type"
-import { ICustomer, IUploadHistory, IUploadState } from "@/types/upload.type"
+import { IUploadHistory, IUploadState, IWSCustomer } from "@/types/upload.type"
 import { AlertService } from "@/common/services"
 import { hideLoading, showLoading } from "@/state/slices/layoutSlice"
 import { RootState } from "@/state/store"
@@ -63,7 +63,7 @@ export const uploadFile = createAsyncThunk<
 })
 
 export const getCustomersData = createAsyncThunk<
-  ICustomer[],
+  IWSCustomer[],
   void,
   { rejectValue: APIError }
 >(
@@ -73,7 +73,7 @@ export const getCustomersData = createAsyncThunk<
       const customers = (getState() as RootState).upload.customers
       if (customers.data.length === 0) dispatch(showLoading())
 
-      const { data } = await api.get<APIData<ICustomer[]>>("/rp-data")
+      const { data } = await api.get<APIData<IWSCustomer[]>>("/rp-data")
       dispatch(hideLoading())
 
       return data.data

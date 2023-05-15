@@ -1,2 +1,6 @@
 export * from "./authSlice"
+export * from "./debitSlice"
 export * from "./layoutSlice"
+export * from "./statementSlice"
+export * from "./uploadSlice"
+export * from "./userSlice"
