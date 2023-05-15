@@ -25,7 +25,7 @@ const dateService = new DateService()
 export default function DebitTransactions() {
   const dispatch = useAppDispatch()
 
-  const { transaction } = useAppSelector(state => state.debit)
+  const { transactions } = useAppSelector(state => state.debit)
 
   const columns: ColumnDef<ITransaction, any>[] = useMemo(
     () => [
@@ -67,24 +67,24 @@ export default function DebitTransactions() {
     []
   )
 
-  const data = useMemo(() => transaction.data, [transaction.data])
+  const data = useMemo(() => transactions.data, [transactions.data])
 
   const selectedDate = useMemo(
     () =>
-      transaction.filteredText
-        ? dateService.formatLocaleDate(transaction.filteredText)
+      transactions.filteredText
+        ? dateService.formatLocaleDate(transactions.filteredText)
         : "",
-    [transaction.filteredText]
+    [transactions.filteredText]
   )
 
   const handleDownload = useCallback(async () => {
-    if (transaction.filter) {
+    if (transactions.filter) {
       const result = await alertService.confirmModal(
         "ຫຼັງຈາກສ້າງໄຟລ໌ແລ້ວຂໍ້ມູນທຸລະກຳທີ່ຖືກສ້າງເປັນໄຟລ໌ XML ຈະຫາຍໄປ"
       )
       if (result.isConfirmed) {
         console.log("handleDownload")
-        dispatch(downloadDebitXML(transaction.filter))
+        dispatch(downloadDebitXML(transactions.filter))
       }
     }
   }, [dispatch])
@@ -111,7 +111,7 @@ export default function DebitTransactions() {
             </Table>
           )}
 
-          {transaction.status !== APIStatus.IDLE && data.length === 0 && (
+          {transactions.status !== APIStatus.IDLE && data.length === 0 && (
             <Empty
               text={`ຍັງບໍ່ທັນມີຂໍ້ມູນການຊໍາລະຄ່ານໍ້າປະປາໃນວັນທີ ${selectedDate}`}
               className="pt-5"

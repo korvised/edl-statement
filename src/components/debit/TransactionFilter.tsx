@@ -15,8 +15,8 @@ const alertService = new AlertService()
 const dateService = new DateService()
 
 function TransactionFilter() {
-  const { transaction } = useAppSelector(state => state.debit)
-  const { filter, status } = transaction
+  const { transactions } = useAppSelector(state => state.debit)
+  const { filter, status } = transactions
 
   const dispatch = useAppDispatch()
 

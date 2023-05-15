@@ -9,12 +9,14 @@ type Color = "primary" | "dark" | "danger" | "cyan" | "white" | "gray"
 type ButtonProps = {
   variant: Variant
   color: Color
+  isCircle?: boolean
   children?: ReactNode
 } & ComponentPropsWithoutRef<"button">
 
 const Button: FC<ButtonProps> = ({
   variant,
   color,
+  isCircle,
   children,
   className,
   value,
@@ -25,6 +27,7 @@ const Button: FC<ButtonProps> = ({
   className = clsx(
     "font-lao",
     disabled && "pointer-events-none opacity-70 brightness-50",
+    isCircle ? "rounded-full" : "rounded-lg",
     buttonBaseStyles[variant],
     buttonVariantStyles[variant][color],
     className

@@ -73,7 +73,7 @@ export const downloadDebitXML = createAsyncThunk<void, IDebitTransFilter>(
 )
 
 const initialState: IDebitState = {
-  transaction: {
+  transactions: {
     status: APIStatus.IDLE,
     data: [],
   },
@@ -91,26 +91,26 @@ const debitSlice = createSlice({
       state,
       action: PayloadAction<IDebitTransFilter>
     ) => {
-      state.transaction.filter = action.payload
+      state.transactions.filter = action.payload
     },
     updateDebitTranFilteredDate: (
       state,
       action: PayloadAction<string | undefined>
     ) => {
-      state.transaction.filteredText = action.payload
+      state.transactions.filteredText = action.payload
     },
   },
   extraReducers: builder => {
     builder.addCase(getDebitTransactions.pending, state => {
-      state.transaction.status = APIStatus.PENDING
+      state.transactions.status = APIStatus.PENDING
     })
     builder.addCase(getDebitTransactions.fulfilled, (state, { payload }) => {
-      state.transaction.status = APIStatus.FULFILLED
-      state.transaction.data = payload
+      state.transactions.status = APIStatus.FULFILLED
+      state.transactions.data = payload
     })
     builder.addCase(getDebitTransactions.rejected, (state, { payload }) => {
-      state.transaction.status = APIStatus.REJECTED
-      state.transaction.error = payload
+      state.transactions.status = APIStatus.REJECTED
+      state.transactions.error = payload
     })
     builder.addCase(getDebitHistories.pending, state => {
       state.histories.status = APIStatus.PENDING

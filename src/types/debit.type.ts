@@ -2,7 +2,7 @@ import { APIError, APIStatus } from "@/types/api.type"
 import { IStatement } from "@/types/statement.type"
 
 export interface IDebitState {
-  transaction: ITransactionState
+  transactions: ITransactionState
   histories: IDebitHistoryState
 }
 
