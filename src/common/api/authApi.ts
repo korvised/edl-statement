@@ -1,16 +1,14 @@
 import axios, { AxiosInstance } from "axios"
-
-import { AUTH_PASSWORD, AUTH_USERNAME, BASE_URL } from "@/config/const"
 import { setupInterceptors } from "./setupInterceptors"
 
 const instance: AxiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
   auth: {
-    username: AUTH_USERNAME,
-    password: AUTH_PASSWORD,
+    username: import.meta.env.VITE_AUTH_USERNAME!,
+    password: import.meta.env.VITE_AUTH_PASSWORD!,
   },
 })
 

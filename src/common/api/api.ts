@@ -1,10 +1,9 @@
 import axios, { AxiosInstance } from "axios"
 
-import { BASE_URL } from "@/config/const"
 import { setupInterceptors } from "./setupInterceptors"
 
 const instance: AxiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

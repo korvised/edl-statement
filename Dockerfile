@@ -1,12 +1,24 @@
-# Bundle static assets with nginx
-FROM nginx:1.21.0-alpine as production
+# Stage 1: Build the ReactJS application
+FROM node:14.15.0-alpine as build
+
+WORKDIR /app
+
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn install
+
+COPY . .
+
+RUN yarn build
+
+# Stage 2: Serve the application
+FROM nginx:1.19.4-alpine
+
 ENV NODE_ENV production
 ENV TZ=Asia/Vientiane
-# Add your nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Copy built assets from builder
-COPY /dist /usr/share/nginx/html
-# Expose port
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
 EXPOSE 80
-# Start nginx
+
 CMD ["nginx", "-g", "daemon off;"]
