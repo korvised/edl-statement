@@ -60,7 +60,7 @@ export default function DebitTransactions() {
       },
       {
         accessorKey: "createAt",
-        cell: info => <DateFormat date={info.getValue()} />,
+        cell: info => info.getValue(),
         header: "ວັນທີ່",
       },
     ],
